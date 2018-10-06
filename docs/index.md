@@ -1,10 +1,10 @@
-# *Berdandy Studios*
-
-I make things.
-
 ---
-
-## *COMING SOON*
-
-- Ping Andy Berdan on [twitter](http://twitter.com/andyberdan) or [email](mailto:andy@berdan.ca). He loves interacting with awesome people.
-- Check out [GMParty](http://gmparty.com). A game design talk show hosted by Andy.
+# You don't need to edit this file, it's empty on purpose.
+# Edit theme's home layout instead if you wanna make some changes
+# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+layout: home
+title: Home
+icon: fa-home
+order: 1
+hide: true
+---
