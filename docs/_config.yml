@@ -58,5 +58,5 @@ twitter_url: http://twitter.com/andyberdan
 # google_analytics:
 
 # The following settings are NECESSARY for the Prologue theme to run:
-theme: jekyll-theme-prologue
+theme: jekyll-theme-leap-day
 collections: [sections]
