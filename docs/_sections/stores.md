@@ -6,7 +6,7 @@ order: 1
 
 Where to Find Our Games...
 
-* ITCH.IO - <https://berdandy.itch.io>
-* DRIVETHRURPG - <https://www.drivethrurpg.com/browse/pub/12986/Berdandy-Studios>
-* DRIVETHRUCARDS - <https://www.drivethrucards.com/browse/pub/12986/Berdandy-Studios>
+* [itch.io](https://berdandy.itch.io)
+* [DriveThruRPG](https://www.drivethrurpg.com/browse/pub/12986/Berdandy-Studios)
+* [DriveThruCards](https://www.drivethrucards.com/browse/pub/12986/Berdandy-Studios) (coming soon)
 
