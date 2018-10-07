@@ -31,12 +31,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Berdandy Studios
-subtitle: Mechanics-light, story-heavy
+subtitle: Conversations With Rules
 description: >- # this means to ignore newlines until "baseurl:"
   Berdandy Studios is a tabletop game developer, specializing in mechanics-light story-heavy experiences.
 author: Andy Berdan
 email: andy@berdan.ca
-avatar: assets/images/avatar.jpg
+avatar: assets/images/logo.png
 
 # You'll want to customize url and baseurl for your own site:
 baseurl: "/" # the subpath of your site, e.g. /blog

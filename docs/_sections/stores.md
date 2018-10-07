@@ -1,12 +1,18 @@
 ---
 title: Where to Find Our Games
 icon: fa-dice
-order: 1
+order: 2
 ---
 
-Where to Find Our Games...
+# Digital and Experimental Releases
 
-* [itch.io](https://berdandy.itch.io)
-* [DriveThruRPG](https://www.drivethrurpg.com/browse/pub/12986/Berdandy-Studios)
-* [DriveThruCards](https://www.drivethrucards.com/browse/pub/12986/Berdandy-Studios) (coming soon)
+[![itch.io logo](assets/images/itchio_logo.png)](https://berdandy.itch.io)
+
+# Print and Limited Digital Releases
+
+[![DriveThruRPG logo](assets/images/dtrpg_logo.png)](https://www.drivethrurpg.com/browse/pub/12986/Berdandy-Studios)
+
+# Coming Soon
+
+[![DriveThruCards logo](assets/images/dtcards_logo.png)](https://www.drivethrucards.com/browse/pub/12986/Berdandy-Studios)
 
