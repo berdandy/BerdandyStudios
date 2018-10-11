@@ -8,11 +8,10 @@ order: 2
 
 [![itch.io logo](assets/images/itchio_logo.png)](https://berdandy.itch.io)
 
-# Print and Limited Digital Releases
-
-[![DriveThruRPG logo](assets/images/dtrpg_logo.png)](https://www.drivethrurpg.com/browse/pub/12986/Berdandy-Studios)
-
-# Coming Soon
+# Print Card Games
 
 [![DriveThruCards logo](assets/images/dtcards_logo.png)](https://www.drivethrucards.com/browse/pub/12986/Berdandy-Studios)
 
+# Print and Limited Digital Releases
+
+[![DriveThruRPG logo](assets/images/dtrpg_logo.png)](https://www.drivethrurpg.com/browse/pub/12986/Berdandy-Studios)
