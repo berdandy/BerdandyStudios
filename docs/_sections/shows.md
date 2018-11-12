@@ -1,7 +1,7 @@
 ---
 title: Shows
 icon: fa-film
-order: Where to Find Our Shows
+order: 3
 ---
 
 Berdandy Studios creates a livestreamed tabletop game design talk show, called GMParty. [You can watch GMParty on YouTube](http://youtube.com/gmparty).
