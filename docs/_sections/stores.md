@@ -10,8 +10,7 @@ order: 2
 <table>
 <tr><td>
 <div class="gumroad-product-embed" data-gumroad-product-id="micdrop"><a href="https://gumroad.com/l/micdrop">Loading...</a></div>
-</td></tr>
-<tr><td>
+</td><td>
 <div class="gumroad-product-embed" data-gumroad-product-id="pitchfest"><a href="https://gumroad.com/l/pitchfest">Loading...</a></div>
 </td></tr>
 </table>
