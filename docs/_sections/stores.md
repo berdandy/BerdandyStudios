@@ -16,10 +16,15 @@ order: 2
 
 # Or see some of our smaller titles below:
 
-<script src="https://gumroad.com/js/gumroad.js"></script>
-<a class="gumroad-button" href="https://gum.co/conspiracy-theory" target="_blank">Conspiracy Theory</a>
-<a class="gumroad-button" href="https://gum.co/ayXYp" target="_blank">Sunslayer / Moonslayer</a>
-<a class="gumroad-button" href="https://gum.co/XcCZf" target="_blank">Squish</a>
+<div style="display:inline-block;">
+  <div class="gumroad-product-embed" data-gumroad-product-id="conspiracy-theory"><a href="https://gumroad.com/l/conspiracy-theory">Loading...</a></div>
+</div>
+<div style="display:inline-block;">
+  <div class="gumroad-product-embed" data-gumroad-product-id="ayXYp"><a href="https://gumroad.com/l/ayXYp">Loading...</a></div>
+</div>
+<div style="display:inline-block;">
+  <div class="gumroad-product-embed" data-gumroad-product-id="XcCZf"><a href="https://gumroad.com/l/XcCZf">Loading...</a></div>
+</div>
 
 # Additionally, you can find more experimental Berdandy Studios products on itch:
 
