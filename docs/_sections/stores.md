@@ -8,9 +8,9 @@ order: 2
 
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
 <table>
-<tr><td>
+<tr><td valign="top">
 <div class="gumroad-product-embed" data-gumroad-product-id="micdrop"><a href="https://gumroad.com/l/micdrop">Loading...</a></div>
-</td><td>
+</td><td valign="top">
 <div class="gumroad-product-embed" data-gumroad-product-id="pitchfest"><a href="https://gumroad.com/l/pitchfest">Loading...</a></div>
 </td></tr>
 </table>
