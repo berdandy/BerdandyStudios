@@ -23,9 +23,7 @@ order: 2
   <div class="gumroad-product-embed" data-gumroad-product-id="XcCZf"><a href="https://gumroad.com/l/XcCZf">Loading...</a></div>
 </div>
 
-# Experimental games:
-
-Some of Berdandy Studios' more experimental games can be found on itch.io:
+Some of Berdandy Studios' more experimental games can also be found on itch.io:
 
 [![itch.io logo](assets/images/itchio_logo.png)](https://berdandy.itch.io)
 
