@@ -13,9 +13,6 @@ order: 2
 <div style="display:inline-block;">
   <div class="gumroad-product-embed" data-gumroad-product-id="pitchfest"><a href="https://gumroad.com/l/pitchfest">Loading...</a></div>
 </div>
-
-# Or see some of our smaller titles below:
-
 <div style="display:inline-block;">
   <div class="gumroad-product-embed" data-gumroad-product-id="conspiracy-theory"><a href="https://gumroad.com/l/conspiracy-theory">Loading...</a></div>
 </div>
