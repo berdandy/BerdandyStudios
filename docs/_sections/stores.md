@@ -4,7 +4,7 @@ icon: fa-dice
 order: 2
 ---
 
-# You can order directly from [https://gumroad.com/berdandy](Berdandy Studios using Gumroad):
+# You can order directly from [Berdandy Studios using Gumroad](https://gumroad.com/berdandy)
 
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
 <div style="display:inline-block; vertical-align: top; width: 40%;">
