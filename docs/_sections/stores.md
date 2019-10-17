@@ -7,13 +7,12 @@ order: 2
 # You can order directly from Berdandy Studios using Gumroad:
 
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
-<table>
-<tr><td valign="top">
+<span style="display:inline-block;">
 <div class="gumroad-product-embed" data-gumroad-product-id="micdrop"><a href="https://gumroad.com/l/micdrop">Loading...</a></div>
-</td><td valign="top">
+</span>
+<span style="display:inline-block;">
 <div class="gumroad-product-embed" data-gumroad-product-id="pitchfest"><a href="https://gumroad.com/l/pitchfest">Loading...</a></div>
-</td></tr>
-</table>
+</span>
 
 # Or see some of our smaller titles below:
 
