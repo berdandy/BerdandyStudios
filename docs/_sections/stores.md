@@ -4,6 +4,11 @@ icon: fa-dice
 order: 2
 ---
 
+# All Berdandy Studios products are available on Gumroad:
+
+<script src="https://gumroad.com/js/gumroad.js"></script>
+<a class="gumroad-button" href="https://gum.co/pitchfest?wanted=true" target="_blank">Buy PitchFest here!</a>
+
 # Primarily find our work on itch.io
 
 [![itch.io logo](assets/images/itchio_logo.png)](https://berdandy.itch.io)
