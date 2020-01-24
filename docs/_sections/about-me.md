@@ -12,4 +12,4 @@ better.  This is a compelling (and hopefully sustainable) alternative to Crowdfu
 
 Questions? Ping [@andyberdan](http://twitter.com/andyberdan) on twitter or email [andy@berdan.ca](mailto:andy@berdan.ca) or subscribe below.
 
-<iframe align="middle" width="480" height="320" src="https://berdandy.substack.com/embed" frameborder="0" scrolling="no"></iframe>
+<iframe width="100%" height="320" src="https://berdandy.substack.com/embed" frameborder="0" scrolling="no"></iframe>
