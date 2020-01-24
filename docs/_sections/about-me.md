@@ -11,3 +11,5 @@ replaces and/or supplements the functional placeholders created by Berdandy Stud
 better.  This is a compelling (and hopefully sustainable) alternative to Crowdfunding Campaign models of game development.
 
 Questions? Ping [@andyberdan](http://twitter.com/andyberdan) on twitter or email [andy@berdan.ca](mailto:andy@berdan.ca)
+
+<iframe width="480" height="320" src="https://berdandy.substack.com/embed" frameborder="0" scrolling="no"></iframe>
