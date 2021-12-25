@@ -60,3 +60,6 @@ twitter_url: http://twitter.com/andyberdan
 # The following settings are NECESSARY for the Prologue theme to run:
 theme: jekyll-theme-prologue
 collections: [sections]
+
+plugins:
+  - jekyll-redirect-from
