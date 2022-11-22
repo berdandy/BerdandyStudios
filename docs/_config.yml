@@ -44,6 +44,7 @@ url: "https://berdandy.com" # the base hostname & protocol for your site
 
 # Social settings
 # Make sure to include the full url including protocol, e.g. https://github.com/chrisbobbe
+mastodon_url: https://mastodon.social/@berdandy
 twitter_url: http://twitter.com/andyberdan
 # facebook_url:
 # googleplus_url:
