@@ -4,18 +4,26 @@
         <atom:link href="https://berdandy.com/feed.rss" rel="self" type="application/rss+xml"/>
         <description>Most of this music happens to be produced while hooked up to a medical IV. It keeps me entertained.
 
-Nice of you to stop by!</description>
+Nice of you to stop by!
+
+Mastodon</description>
         <image>
     <link>https://berdandy.com/</link>
     <title>Berdandy's Catalog</title>
     <url>https://berdandy.com/feed.jpg</url>
 </image>
         <language>en</language>
-        <lastBuildDate>Tue, 27 Feb 2024 01:35:45 +0000</lastBuildDate>
+        <lastBuildDate>Tue, 27 Feb 2024 20:03:34 +0000</lastBuildDate>
         <link>https://berdandy.com/</link>
         <title>Berdandy's Catalog</title>
         
         <item>
+    
+    <guid>https://berdandy.com/drip-drop-ep</guid>
+    <link>https://berdandy.com/drip-drop-ep</link>
+    <title>Berdandy – Drip Drop - EP</title>
+</item>
+<item>
     
     <guid>https://berdandy.com/hypnotoad-on-a-hot-plate-single</guid>
     <link>https://berdandy.com/hypnotoad-on-a-hot-plate-single</link>
@@ -23,27 +31,9 @@ Nice of you to stop by!</description>
 </item>
 <item>
     
-    <guid>https://berdandy.com/under-a-delusion-of-sleep-single</guid>
-    <link>https://berdandy.com/under-a-delusion-of-sleep-single</link>
-    <title>Berdandy – Under a Delusion of Sleep - Single</title>
-</item>
-<item>
-    
-    <guid>https://berdandy.com/crashing-a-car-through-a-gameshow-studio-single</guid>
-    <link>https://berdandy.com/crashing-a-car-through-a-gameshow-studio-single</link>
-    <title>Berdandy – Crashing a Car Through a Gameshow Studio - Single</title>
-</item>
-<item>
-    
     <guid>https://berdandy.com/retroracle-single</guid>
     <link>https://berdandy.com/retroracle-single</link>
     <title>Berdandy – Retroracle - Single</title>
-</item>
-<item>
-    
-    <guid>https://berdandy.com/crank-the-glitch-single</guid>
-    <link>https://berdandy.com/crank-the-glitch-single</link>
-    <title>Berdandy – Crank the Glitch - Single</title>
 </item>
 <item>
     
@@ -56,12 +46,6 @@ Nice of you to stop by!</description>
     <guid>https://berdandy.com/souls-beat-slow-single</guid>
     <link>https://berdandy.com/souls-beat-slow-single</link>
     <title>Berdandy – Souls Beat Slow - Single</title>
-</item>
-<item>
-    <description>This track was named after the event when a Christmas Tree fell over and most of the ornaments shattered. I think this one was the better for it.</description>
-    <guid>https://berdandy.com/no-slippers-at-midnight-single</guid>
-    <link>https://berdandy.com/no-slippers-at-midnight-single</link>
-    <title>Berdandy – No Slippers at Midnight - Single</title>
 </item>
     </channel>
 </rss>
