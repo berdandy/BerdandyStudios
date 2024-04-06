@@ -13,7 +13,7 @@ Mastodon</description>
     <url>https://berdandy.com/feed.jpg</url>
 </image>
         <language>en</language>
-        <lastBuildDate>Mon, 4 Mar 2024 19:58:43 +0000</lastBuildDate>
+        <lastBuildDate>Sat, 6 Apr 2024 03:34:18 +0000</lastBuildDate>
         <link>https://berdandy.com/</link>
         <title>Berdandy's Catalog</title>
         
@@ -22,6 +22,12 @@ Mastodon</description>
     <guid>https://berdandy.com/drip-drop-ep</guid>
     <link>https://berdandy.com/drip-drop-ep</link>
     <title>Berdandy – Drip Drop - EP</title>
+</item>
+<item>
+    
+    <guid>https://berdandy.com/theremin-crown-single</guid>
+    <link>https://berdandy.com/theremin-crown-single</link>
+    <title>Berdandy – Theremin Crown - Single</title>
 </item>
 <item>
     
@@ -46,6 +52,18 @@ Mastodon</description>
     <guid>https://berdandy.com/souls-beat-slow-single</guid>
     <link>https://berdandy.com/souls-beat-slow-single</link>
     <title>Berdandy – Souls Beat Slow - Single</title>
+</item>
+<item>
+    
+    <guid>https://berdandy.com/lessol-single</guid>
+    <link>https://berdandy.com/lessol-single</link>
+    <title>Berdandy – Lesser Sound of London - Single</title>
+</item>
+<item>
+    
+    <guid>https://berdandy.com/pickups-single</guid>
+    <link>https://berdandy.com/pickups-single</link>
+    <title>Berdandy – Pickups - Single</title>
 </item>
     </channel>
 </rss>
