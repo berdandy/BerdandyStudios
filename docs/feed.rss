@@ -13,11 +13,17 @@ Mastodon</description>
     <url>https://berdandy.com/feed.jpg</url>
 </image>
         <language>en</language>
-        <lastBuildDate>Mon, 10 Jun 2024 16:03:26 +0000</lastBuildDate>
+        <lastBuildDate>Mon, 12 Aug 2024 20:39:20 +0000</lastBuildDate>
         <link>https://berdandy.com/</link>
         <title>Berdandy's Catalog</title>
         
         <item>
+    <description>The paintbrush was angry at the color the artist chose to use.</description>
+    <guid>https://berdandy.com/angry-paintbrush-ep</guid>
+    <link>https://berdandy.com/angry-paintbrush-ep</link>
+    <title>Berdandy – Angry Paintbrush - EP</title>
+</item>
+<item>
     
     <guid>https://berdandy.com/drip-drop-ep</guid>
     <link>https://berdandy.com/drip-drop-ep</link>
