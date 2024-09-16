@@ -13,45 +13,15 @@ Mastodon</description>
     <url>https://berdandy.com/feed.jpg</url>
 </image>
         <language>en</language>
-        <lastBuildDate>Wed, 14 Aug 2024 02:49:04 +0000</lastBuildDate>
+        <lastBuildDate>Mon, 16 Sep 2024 17:39:50 +0000</lastBuildDate>
         <link>https://berdandy.com/</link>
         <title>Berdandy's Catalog</title>
         
         <item>
-    <description>The paintbrush was angry at the color the artist chose to use.</description>
-    <guid>https://berdandy.com/angry-paintbrush-ep</guid>
-    <link>https://berdandy.com/angry-paintbrush-ep</link>
-    <title>Berdandy – Angry Paintbrush - EP</title>
-</item>
-<item>
-    
-    <guid>https://berdandy.com/drip-drop-ep</guid>
-    <link>https://berdandy.com/drip-drop-ep</link>
-    <title>Berdandy – Drip Drop - EP</title>
-</item>
-<item>
     
     <guid>https://berdandy.com/theremin-crown-single</guid>
     <link>https://berdandy.com/theremin-crown-single</link>
     <title>Berdandy – Theremin Crown - Single</title>
-</item>
-<item>
-    
-    <guid>https://berdandy.com/hypnotoad-single</guid>
-    <link>https://berdandy.com/hypnotoad-single</link>
-    <title>Berdandy – Hypnotoad on a Hot Plate - Single</title>
-</item>
-<item>
-    
-    <guid>https://berdandy.com/retroracle-single</guid>
-    <link>https://berdandy.com/retroracle-single</link>
-    <title>Berdandy – Retroracle - Single</title>
-</item>
-<item>
-    
-    <guid>https://berdandy.com/nanobees-single</guid>
-    <link>https://berdandy.com/nanobees-single</link>
-    <title>Berdandy – Do Nanobees Dream of Electric Honey? - Single</title>
 </item>
 <item>
     
@@ -67,15 +37,51 @@ Mastodon</description>
 </item>
 <item>
     
+    <guid>https://berdandy.com/glitching-past-red-rock-single</guid>
+    <link>https://berdandy.com/glitching-past-red-rock-single</link>
+    <title>Berdandy – Glitching Past Red Rock - Single</title>
+</item>
+<item>
+    
     <guid>https://berdandy.com/lessol-single</guid>
     <link>https://berdandy.com/lessol-single</link>
     <title>Berdandy – Lesser Sound of London - Single</title>
 </item>
 <item>
     
+    <guid>https://berdandy.com/retroracle-single</guid>
+    <link>https://berdandy.com/retroracle-single</link>
+    <title>Berdandy – Retroracle - Single</title>
+</item>
+<item>
+    
+    <guid>https://berdandy.com/nanobees-single</guid>
+    <link>https://berdandy.com/nanobees-single</link>
+    <title>Berdandy – Do Nanobees Dream of Electric Honey? - Single</title>
+</item>
+<item>
+    
     <guid>https://berdandy.com/pickups-single</guid>
     <link>https://berdandy.com/pickups-single</link>
     <title>Berdandy – Pickups - Single</title>
+</item>
+<item>
+    
+    <guid>https://berdandy.com/hypnotoad-single</guid>
+    <link>https://berdandy.com/hypnotoad-single</link>
+    <title>Berdandy – Hypnotoad on a Hot Plate - Single</title>
+</item>
+<item>
+    
+    <guid>https://berdandy.com/drip-drop-ep</guid>
+    <link>https://berdandy.com/drip-drop-ep</link>
+    <title>Berdandy – Drip Drop - EP</title>
+</item>
+<item>
+    <description>The paintbrush was angry at the color the artist chose to use.</description>
+    <guid>https://berdandy.com/angry-paintbrush-ep</guid>
+    <link>https://berdandy.com/angry-paintbrush-ep</link>
+    <title>Berdandy – Angry Paintbrush - EP</title>
 </item>
     </channel>
 </rss>
