@@ -2,23 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <atom:link href="https://berdandy.com/feed.rss" rel="self" type="application/rss+xml"/>
-        <description>Weaving realms of rhythm and coding dreams by day
+        <description>Weaving realms of rhythm and coding dreams by day.
 
-"This slaps harder than a gamer rage quitting on a controller" -- Max Chuckles
-
-Mastodon</description>
+"This slaps harder than a gamer rage quitting on a controller" -- Max Chuckles</description>
         <image>
     <link>https://berdandy.com/</link>
     <title>Berdandy's Catalog</title>
     <url>https://berdandy.com/feed.jpg</url>
 </image>
         <language>en</language>
-        <lastBuildDate>Fri, 1 Nov 2024 14:50:51 +0000</lastBuildDate>
+        <lastBuildDate>Fri, 1 Nov 2024 18:31:49 +0000</lastBuildDate>
         <link>https://berdandy.com/</link>
         <title>Berdandy's Catalog</title>
         
         <item>
-    <description>The paintbrush was angry at the color the artist chose to use.</description>
+    
     <guid>https://berdandy.com/angry-paintbrush-ep/</guid>
     <link>https://berdandy.com/angry-paintbrush-ep/</link>
     <title>Berdandy – Angry Paintbrush - EP</title>
@@ -52,6 +50,12 @@ Mastodon</description>
     <guid>https://berdandy.com/nanobees-single/</guid>
     <link>https://berdandy.com/nanobees-single/</link>
     <title>Berdandy – Do Nanobees Dream of Electric Honey? - Single</title>
+</item>
+<item>
+    
+    <guid>https://berdandy.com/regret-single/</guid>
+    <link>https://berdandy.com/regret-single/</link>
+    <title>Berdandy – Regrets - Single</title>
 </item>
 <item>
     
