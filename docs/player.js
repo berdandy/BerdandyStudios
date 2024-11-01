@@ -1,37 +1,33 @@
-const failedIcon = document.querySelector('#failed_icon');
+const T = {
+    listen: 'Listen',
+    pause: 'Pause'
+};
 const loadingIcon = document.querySelector('#loading_icon');
 const pauseIcon = document.querySelector('#pause_icon');
 const playIcon = document.querySelector('#play_icon');
-const scrollIcon = document.querySelector('#scroll_icon');
-const successIcon = document.querySelector('#success_icon');
-
-const browseButton = document.querySelector('button#browse');
 
 const listenButton = document.querySelector('button.listen');
-
-const copyFeedbackTimeouts = {};
+const listenButtonIcon = document.querySelector('button.listen .icon');
+const listenButtonLabel = document.querySelector('button.listen .label');
 
 let activeTrack = null;
 let firstTrack = null;
+let preselectedTrack = null;
 
-let dockedPlayer;
-if (document.querySelector('.docked_player')) {
-    const container = document.querySelector('.docked_player');
-
-    dockedPlayer = {
-        container,
-        playbackButton: container.querySelector('button.playback'),
-        progress: container.querySelector('.progress'),
-        nextTrackButton: container.querySelector('button.next_track'),
-        number: container.querySelector('.number'),
-        time: container.querySelector('.time'),
-        timeline: container.querySelector('.timeline'),
-        timelineInput: container.querySelector('.timeline input'),
-        titleWrapper: container.querySelector('.title_wrapper'),
-        volumeButton: container.querySelector('.volume button'),
-        volumeInput: container.querySelector('.volume input')
-    };
-}
+const dockedPlayerContainer = document.querySelector('.docked_player');
+const dockedPlayer = {
+    container: dockedPlayerContainer,
+    nextTrackButton: dockedPlayerContainer.querySelector('button.next_track'),
+    number: dockedPlayerContainer.querySelector('.number'),
+    playbackButton: dockedPlayerContainer.querySelector('button.playback'),
+    progress: dockedPlayerContainer.querySelector('.progress'),
+    time: dockedPlayerContainer.querySelector('.time'),
+    timeline: dockedPlayerContainer.querySelector('.timeline'),
+    timelineInput: dockedPlayerContainer.querySelector('.timeline input'),
+    titleWrapper: dockedPlayerContainer.querySelector('.title_wrapper'),
+    volumeButton: dockedPlayerContainer.querySelector('.volume button'),
+    volumeInput: dockedPlayerContainer.querySelector('.volume input')
+};
 
 let globalUpdatePlayHeadInterval;
 
@@ -40,50 +36,14 @@ const volume = {
     level: 1,
 };
 
-if (dockedPlayer) {
-    const persistedVolume = localStorage.getItem('faircampVolume');
-    if (persistedVolume !== null) {
-        const level = parseFloat(persistedVolume);
-        if (level >= 0 && level <= 1) {
-            volume.level = level;
-        }
+const persistedVolume = localStorage.getItem('faircampVolume');
+if (persistedVolume !== null) {
+    const level = parseFloat(persistedVolume);
+    if (level >= 0 && level <= 1) {
+        volume.level = level;
     }
-    updateVolume();
 }
-
-function copyFeedback(content, feedbackIcon, iconContainer, originalIcon) {
-    if (content in copyFeedbackTimeouts) {
-        clearTimeout(copyFeedbackTimeouts[content]);
-        delete copyFeedbackTimeouts[content];
-    }
-
-    iconContainer.replaceChildren(feedbackIcon.content.cloneNode(true));
-
-    copyFeedbackTimeouts[content] = setTimeout(
-        () => iconContainer.replaceChildren(originalIcon.content.cloneNode(true)),
-        3000
-    );
-}
-
-function copyToClipboard(button) {
-    const content = button.dataset.content;
-    const iconContainer = button.querySelector('.icon');
-    const originalIcon = document.querySelector('#copy_icon');
-    navigator.clipboard
-        .writeText(content)
-        .then(() => copyFeedback(content, successIcon, iconContainer, originalIcon))
-        .catch(_err => copyFeedback(content, failedIcon, iconContainer, originalIcon));
-};
-
-function copyTrackToClipboard(button) {
-    const content = button.dataset.content;
-    const iconContainer = button;
-    const originalIcon = document.querySelector('#copy_track_icon');
-    navigator.clipboard
-        .writeText(content)
-        .then(() => copyFeedback(content, successIcon, iconContainer, originalIcon))
-        .catch(_err => copyFeedback(content, failedIcon, iconContainer, originalIcon));
-};
+updateVolume();
 
 function formatTime(seconds) {
     if (seconds < 60) {
@@ -114,7 +74,7 @@ async function mountAndPlay(track, seekTo) {
     // Not available on a track player
     if (dockedPlayer.number) {
         dockedPlayer.nextTrackButton.toggleAttribute('disabled', !track.nextTrack);
-        dockedPlayer.number.textContent = track.numberInner.textContent;
+        dockedPlayer.number.textContent = track.number.textContent;
     }
 
     updateVolume();
@@ -125,10 +85,10 @@ async function mountAndPlay(track, seekTo) {
     // even if we potentially replace it with the pause icon right after that
     // if there doesn't end up to be any loading required.
     track.container.classList.add('active');
-    track.playbackButton.replaceChildren(loadingIcon.content.cloneNode(true));
+    track.playbackButtonIcon.replaceChildren(loadingIcon.content.cloneNode(true));
     dockedPlayer.playbackButton.replaceChildren(loadingIcon.content.cloneNode(true));
-    listenButton.querySelector('.icon').replaceChildren(loadingIcon.content.cloneNode(true));
-    listenButton.querySelector('.label').textContent = 'Pause'; // TODO: Translate
+    listenButtonIcon.replaceChildren(loadingIcon.content.cloneNode(true));
+    listenButtonLabel.textContent = T.pause;
 
     if (track.audio.preload !== 'auto') {
         track.audio.preload = 'auto';
@@ -184,9 +144,9 @@ async function mountAndPlay(track, seekTo) {
             delete track.seeking;
             dockedPlayer.playbackButton.replaceChildren(playIcon.content.cloneNode(true));
             track.container.classList.remove('active');
-            track.playbackButton.replaceChildren(playIcon.content.cloneNode(true));
-            listenButton.querySelector('.icon').replaceChildren(playIcon.content.cloneNode(true));
-            listenButton.querySelector('.label').textContent = 'Listen'; // TODO: Translate
+            track.playbackButtonIcon.replaceChildren(playIcon.content.cloneNode(true));
+            listenButtonIcon.replaceChildren(playIcon.content.cloneNode(true));
+            listenButtonLabel.textContent = T.listen;
         };
 
         // We expose both `abortSeeking` and `seek` on this seeking object,
@@ -197,6 +157,14 @@ async function mountAndPlay(track, seekTo) {
 }
 
 function togglePlayback(track, seekTo = null) {
+    if (preselectedTrack !== null) {
+        if (track !== preselectedTrack) {
+            preselectedTrack.container.classList.remove('active');
+        }
+
+        preselectedTrack = null;
+    }
+
     if (!activeTrack) {
         mountAndPlay(track, seekTo);
     } else if (track === activeTrack) {
@@ -267,8 +235,6 @@ function announcePlayhead(track) {
 function updatePlayhead(track, reset = false) {
     const { audio } = track;
     const factor = reset ? 0 : audio.currentTime / track.duration;
-
-    track.time.textContent = reset ? formatTime(track.duration) : `- ${formatTime(track.duration - audio.currentTime)}`;
 
     dockedPlayer.progress.style.setProperty('width', `${factor * 100}%`);
     dockedPlayer.time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(track.duration)}`;
@@ -361,136 +327,132 @@ function updateVolume(restoreLevel = null) {
     }
 }
 
-if (dockedPlayer) {
-    dockedPlayer.container.addEventListener('keydown', event => {
-        if (event.key === 'ArrowLeft') {
-            event.preventDefault();
-            const seekTo = Math.max(0, activeTrack.audio.currentTime - 5);
-            togglePlayback(activeTrack, seekTo);
-        } else if (event.key === 'ArrowRight') {
-            event.preventDefault();
-            const seekTo = Math.min(activeTrack.duration - 1, activeTrack.audio.currentTime + 5);
-            togglePlayback(activeTrack, seekTo);
-        }
-    });
-
-    dockedPlayer.playbackButton.addEventListener('click', () => {
-        togglePlayback(activeTrack ?? firstTrack);
-    });
-
-    // Not available on a track player
-    if (dockedPlayer.nextTrackButton) {
-        dockedPlayer.nextTrackButton.addEventListener('click', () => {
-            if (activeTrack?.nextTrack) {
-                togglePlayback(activeTrack.nextTrack);
-            }
-        });
-    }
-
-    dockedPlayer.timeline.addEventListener('click', () => {
-        const factor = (event.clientX - dockedPlayer.timeline.getBoundingClientRect().x) / dockedPlayer.timeline.getBoundingClientRect().width;
-        const seekTo = factor * dockedPlayer.timelineInput.max;
+dockedPlayer.container.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        const seekTo = Math.max(0, activeTrack.audio.currentTime - 5);
         togglePlayback(activeTrack, seekTo);
-        dockedPlayer.timelineInput.classList.add('focus_from_click');
-        dockedPlayer.timelineInput.focus();
-    });
-
-    dockedPlayer.timelineInput.addEventListener('blur', () => {
-        dockedPlayer.timelineInput.classList.remove('focus_from_click');
-    });
-
-    dockedPlayer.timelineInput.addEventListener('keydown', event => {
-        if (event.key === ' ' || event.key === 'Enter') {
-            event.preventDefault();
-            togglePlayback(activeTrack);
-        }
-    });
-
-    volume.container.addEventListener('wheel', event => {
+    } else if (event.key === 'ArrowRight') {
         event.preventDefault();
-
-        volume.level += event.deltaY * -0.0001;
-
-        if (volume.level > 1) {
-            volume.level = 1;
-        } else if (volume.level < 0) {
-            volume.level = 0;
-        }
-
-        updateVolume();
-    });
-
-    dockedPlayer.volumeButton.addEventListener('click', () => {
-        if (volume.level > 0) {
-            const restoreLevel = volume.level;
-            volume.level = 0;
-            updateVolume(restoreLevel);
-        } else {
-            volume.level = volume.restoreLevel ?? 1;
-            updateVolume();
-        }
-    });
-
-    dockedPlayer.volumeInput.addEventListener('input', () => {
-        volume.level = parseFloat(dockedPlayer.volumeInput.valueAsNumber);
-        updateVolume();
-    });
-
-    // This was observed to jump between 0 and 1 without a single step in between,
-    // hence we disable the default behavior and handle it ourselves
-    dockedPlayer.volumeInput.addEventListener('keydown', event => {
-        if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
-            volume.level -= 0.02;
-        } else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
-            volume.level += 0.02;
-        } else {
-            return;
-        }
-
-        if (volume.level > 1) {
-            volume.level = 1;
-        } else if (volume.level < 0) {
-            volume.level = 0;
-        }
-
-        updateVolume();
-
-        event.preventDefault();
-    });
-
-    // This was observed to "scroll" between 0 and 1 without a single step in between,
-    // hence we disable the default behavior and let the event bubble up to our own handler
-    dockedPlayer.volumeInput.addEventListener('wheel', event => event.preventDefault());
-
-    listenButton.addEventListener('click', () => {
-        togglePlayback(firstTrack);
-    });
-}
-
-browseButton.addEventListener('click', () => {
-    // TODO: aria attributes etc.
-    browser.classList.add('active');
+        const seekTo = Math.min(activeTrack.duration - 1, activeTrack.audio.currentTime + 5);
+        togglePlayback(activeTrack, seekTo);
+    }
 });
 
-for (const copyButton of document.querySelectorAll('[data-copy]')) {
-    copyButton.addEventListener('click', () => {
-        copyToClipboard(copyButton);
+dockedPlayer.playbackButton.addEventListener('click', () => {
+    togglePlayback(activeTrack ?? firstTrack);
+});
+
+// Not available on a track player
+if (dockedPlayer.nextTrackButton) {
+    dockedPlayer.nextTrackButton.addEventListener('click', () => {
+        if (activeTrack?.nextTrack) {
+            togglePlayback(activeTrack.nextTrack);
+        }
     });
 }
 
-for (const copyTrackButton of document.querySelectorAll('[data-copy-track]')) {
-    copyTrackButton.addEventListener('click', () => {
-        copyTrackToClipboard(copyTrackButton);
-    });
+dockedPlayer.timeline.addEventListener('click', () => {
+    const factor = (event.clientX - dockedPlayer.timeline.getBoundingClientRect().x) / dockedPlayer.timeline.getBoundingClientRect().width;
+    const seekTo = factor * dockedPlayer.timelineInput.max;
+    togglePlayback(activeTrack, seekTo);
+    dockedPlayer.timelineInput.classList.add('focus_from_click');
+    dockedPlayer.timelineInput.focus();
+});
+
+dockedPlayer.timelineInput.addEventListener('blur', () => {
+    dockedPlayer.timelineInput.classList.remove('focus_from_click');
+});
+
+dockedPlayer.timelineInput.addEventListener('keydown', event => {
+    if (event.key === ' ' || event.key === 'Enter') {
+        event.preventDefault();
+        togglePlayback(activeTrack);
+    }
+});
+
+volume.container.addEventListener('wheel', event => {
+    event.preventDefault();
+
+    volume.level += event.deltaY * -0.0001;
+
+    if (volume.level > 1) {
+        volume.level = 1;
+    } else if (volume.level < 0) {
+        volume.level = 0;
+    }
+
+    updateVolume();
+});
+
+dockedPlayer.volumeButton.addEventListener('click', () => {
+    if (volume.level > 0) {
+        const restoreLevel = volume.level;
+        volume.level = 0;
+        updateVolume(restoreLevel);
+    } else {
+        volume.level = volume.restoreLevel ?? 1;
+        updateVolume();
+    }
+});
+
+dockedPlayer.volumeInput.addEventListener('input', () => {
+    volume.level = parseFloat(dockedPlayer.volumeInput.valueAsNumber);
+    updateVolume();
+});
+
+// This was observed to jump between 0 and 1 without a single step in between,
+// hence we disable the default behavior and handle it ourselves
+dockedPlayer.volumeInput.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
+        volume.level -= 0.02;
+    } else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
+        volume.level += 0.02;
+    } else {
+        return;
+    }
+
+    if (volume.level > 1) {
+        volume.level = 1;
+    } else if (volume.level < 0) {
+        volume.level = 0;
+    }
+
+    updateVolume();
+
+    event.preventDefault();
+});
+
+// This was observed to "scroll" between 0 and 1 without a single step in between,
+// hence we disable the default behavior and let the event bubble up to our own handler
+dockedPlayer.volumeInput.addEventListener('wheel', event => event.preventDefault());
+
+listenButton.addEventListener('click', () => {
+    togglePlayback(activeTrack ?? preselectedTrack ?? firstTrack);
+});
+
+const resizeObserver = new ResizeObserver(entries => {
+    const minWidth = entries.reduce(
+        (minWidth, entry) => Math.min(entry.contentRect.width, minWidth),
+        Infinity
+    );
+
+    waveforms(minWidth);
+});
+
+let preselectedTrackOffset = null;
+const searchParams = new URLSearchParams();
+if (location.search.match(/^\?[0-9]+$/)) {
+    preselectedTrackOffset = parseInt(location.search.substring(1)) - 1;
 }
 
 let previousTrack = null;
 for (const container of document.querySelectorAll('.track')) {
     const artists = container.querySelector('.artists');
     const audio = container.querySelector('audio');
-    const numberInner = container.querySelector('.number.inner');
+    const number = container.querySelector('.number');
     const playbackButton = container.querySelector('.track_playback');
-    const time = container.querySelector('.time');
+    const playbackButtonIcon = container.querySelector('.track_playback .icon');
     const title = container.querySelector('.title');
 
     const duration = parseFloat(container.dataset.duration);
@@ -500,9 +462,9 @@ for (const container of document.querySelectorAll('.track')) {
         audio,
         container,
         duration,
-        numberInner,
+        number,
         playbackButton,
-        time,
+        playbackButtonIcon,
         title
     };
 
@@ -520,6 +482,16 @@ for (const container of document.querySelectorAll('.track')) {
 
     if (firstTrack === null) {
         firstTrack = track;
+        preselectedTrack = track;
+    }
+
+    if (preselectedTrackOffset !== null) {
+        if (preselectedTrackOffset > 0) {
+            preselectedTrackOffset -= 1;
+        } else {
+            preselectedTrack = track;
+            preselectedTrackOffset = null;
+        }
     }
 
     if (previousTrack !== null) {
@@ -545,9 +517,9 @@ for (const container of document.querySelectorAll('.track')) {
 
         container.classList.remove('playing');
         dockedPlayer.playbackButton.replaceChildren(playIcon.content.cloneNode(true));
-        playbackButton.replaceChildren(playIcon.content.cloneNode(true));
-        listenButton.querySelector('.icon').replaceChildren(playIcon.content.cloneNode(true));
-        listenButton.querySelector('.label').textContent = 'Listen'; // TODO: Translate
+        listenButtonIcon.replaceChildren(playIcon.content.cloneNode(true));
+        listenButtonLabel.textContent = T.listen;
+        track.playbackButtonIcon.replaceChildren(playIcon.content.cloneNode(true));
 
         if (track.onPause) {
             track.onPause();
@@ -561,32 +533,32 @@ for (const container of document.querySelectorAll('.track')) {
     audio.addEventListener('play', event => {
         container.classList.add('active', 'playing');
         dockedPlayer.playbackButton.replaceChildren(pauseIcon.content.cloneNode(true));
-        playbackButton.replaceChildren(pauseIcon.content.cloneNode(true));
-        listenButton.querySelector('.icon').replaceChildren(pauseIcon.content.cloneNode(true));
-        listenButton.querySelector('.label').textContent = 'Pause'; // TODO: Translate
+        listenButtonIcon.replaceChildren(pauseIcon.content.cloneNode(true));
+        listenButtonLabel.textContent = T.pause;
+        track.playbackButtonIcon.replaceChildren(pauseIcon.content.cloneNode(true));
 
-        globalUpdatePlayHeadInterval = setInterval(() => updatePlayhead(track), 200);
+        globalUpdatePlayHeadInterval = setInterval(() => updatePlayhead(track), 1000 / 24);
         updatePlayhead(track);
         announcePlayhead(track);
     });
 
     audio.addEventListener('playing', event => {
         dockedPlayer.playbackButton.replaceChildren(pauseIcon.content.cloneNode(true));
-        playbackButton.replaceChildren(pauseIcon.content.cloneNode(true));
-        listenButton.querySelector('.icon').replaceChildren(pauseIcon.content.cloneNode(true));
-        listenButton.querySelector('.label').textContent = 'Pause'; // TODO: Translate
+        listenButtonIcon.replaceChildren(pauseIcon.content.cloneNode(true));
+        listenButtonLabel.textContent = T.pause;
+        track.playbackButtonIcon.replaceChildren(pauseIcon.content.cloneNode(true));
     });
 
     audio.addEventListener('waiting', event => {
         // TODO: Eventually we could augment various screenreader labels here to
         //       indicate the loading state too
         dockedPlayer.playbackButton.replaceChildren(loadingIcon.content.cloneNode(true));
-        playbackButton.replaceChildren(loadingIcon.content.cloneNode(true));
-        listenButton.querySelector('.icon').replaceChildren(loadingIcon.content.cloneNode(true));
-        listenButton.querySelector('.label').textContent = 'Pause'; // TODO: Translate
+        listenButtonIcon.replaceChildren(loadingIcon.content.cloneNode(true));
+        listenButtonLabel.textContent = T.pause;
+        track.playbackButtonIcon.replaceChildren(loadingIcon.content.cloneNode(true));
     });
 
-    playbackButton.addEventListener('click', event => {
+    track.playbackButton.addEventListener('click', event => {
         event.preventDefault();
         togglePlayback(track);
     });
@@ -641,8 +613,13 @@ for (const container of document.querySelectorAll('.track')) {
                 togglePlayback(track);
             }
         });
+
+        const waveformParent = track.waveform.container.parentElement;
+        resizeObserver.observe(waveformParent);
     }
 }
+
+preselectedTrack.container.classList.add('active');
 
 function decode(string) {
     const peaks = [];
@@ -665,41 +642,30 @@ function decode(string) {
     return peaks;
 }
 
-// IMPORTANT: Keep these three in sync with css
-const PADDING_HORIZONTAL_REM = 2;
 const BREAKPOINT_REDUCED_WAVEFORM_REM = 20;
-const BREAKPOINT_MAX_WAVEFORM_REM = 30;
-
-const MAX_TRACK_DURATION_WIDTH_EM = 20;
-const REDUCED_TRACK_DURATION_WIDTH_EM = 18;
 const TRACK_HEIGHT_EM = 1.5;
 const WAVEFORM_PADDING_EM = 0.3;
 const WAVEFORM_HEIGHT = TRACK_HEIGHT_EM - WAVEFORM_PADDING_EM * 2.0;
 
-const waveformRenderState = {};
+const WAVEFORM_WIDTH_PADDING_REM = 5;
+const WAVEFORM_WIDTH_TOLERANCE_REM = 2.5;
 
-function waveforms() {
+const waveformRenderState = { widthRem: 0 };
+
+function waveforms(minWidth) {
     const baseFontSizePx = parseFloat(
         window.getComputedStyle(document.documentElement)
               .getPropertyValue('font-size')
               .replace('px', '')
     );
-    const viewportWidthRem = window.innerWidth / baseFontSizePx;
 
-    let maxWaveformWidthRem;
-    let relativeWaveforms;
-    if (viewportWidthRem >= BREAKPOINT_MAX_WAVEFORM_REM) {
-        maxWaveformWidthRem = MAX_TRACK_DURATION_WIDTH_EM;
-        relativeWaveforms = !document.querySelector('[data-disable-relative-waveforms]');
-    } else if (viewportWidthRem >= BREAKPOINT_REDUCED_WAVEFORM_REM) {
-        maxWaveformWidthRem = REDUCED_TRACK_DURATION_WIDTH_EM;
-        relativeWaveforms = !document.querySelector('[data-disable-relative-waveforms]');
-    } else {
-        maxWaveformWidthRem = viewportWidthRem - PADDING_HORIZONTAL_REM;
-        relativeWaveforms = false;
-    }
+    // We subtract -1 to avoid the waveform forcing its container to resize,
+    // thereby causing recursive resize feedback.
+    let maxWaveformWidthRem = (minWidth - WAVEFORM_WIDTH_PADDING_REM) / baseFontSizePx;
+    let relativeWaveforms = maxWaveformWidthRem > BREAKPOINT_REDUCED_WAVEFORM_REM && !document.querySelector('[data-disable-relative-waveforms]');
 
-    if (waveformRenderState.widthRem === maxWaveformWidthRem) return;
+    if (waveformRenderState.widthRem >= maxWaveformWidthRem - WAVEFORM_WIDTH_TOLERANCE_REM &&
+        waveformRenderState.widthRem <= maxWaveformWidthRem + WAVEFORM_WIDTH_TOLERANCE_REM) return;
 
     const longestTrackDuration = parseFloat(document.querySelector('[data-longest-duration]').dataset.longestDuration);
 
@@ -806,76 +772,3 @@ function waveforms() {
     waveformRenderState.initialized = true;
     waveformRenderState.widthRem = maxWaveformWidthRem;
 }
-
-window.addEventListener('DOMContentLoaded', event => {
-    // TODO: Potentially split player js into seperate script file
-    //       so we don't need the check, and only load the additional
-    //       js payload where it's needed.
-    if (document.querySelector('[data-peaks]')) {
-        waveforms();
-        window.addEventListener('resize', waveforms);
-    }
-
-    if (navigator.clipboard) {
-        for (const button of document.querySelectorAll('[data-copy], [data-copy-track]')) {
-            if (button.dataset.dynamicUrl !== undefined) {
-                if (button.dataset.dynamicUrl === '') {
-                    // Build link to this page dynamically
-                    const thisPageUrl = window.location.href.split('#')[0]; // discard hash if present
-                    button.dataset.content = thisPageUrl;
-                } else {
-                    // Build link to subpage dynamically
-                    let subPageUrl = window.location.href.split('#')[0]; // discard hash if present
-                    if (!subPageUrl.endsWith('/')) { subPageUrl += '/' }
-                    subPageUrl += button.dataset.dynamicUrl;
-                    button.dataset.content = subPageUrl;
-                }
-            }
-        }
-    } else {
-        for (const button of document.querySelectorAll('[data-copy], [data-copy-track]')) {
-            button.remove();
-        }
-    }
-
-    const intersections = {};
-    const descriptionHint = document.querySelector('.scroll_hints a[href="#description"]');
-    const overviewHint = document.querySelector('.scroll_hints a[href="#"]');
-
-    const updateScrollHints = () => {
-        if (descriptionHint) {
-            descriptionHint.classList.toggle('active', !intersections.overview && !intersections.description);
-        }
-        if (overviewHint) {
-            overviewHint.classList.toggle('active', !intersections.overview);
-        }
-    };
-
-    if (descriptionHint) {
-        const description = document.querySelector('.page[data-description]');
-        const observer = new IntersectionObserver(entries => {
-            for (const entry of entries) {
-                if (entry.target === description) {
-                    intersections.description = entry.intersectionRatio >= 0.3;
-                    updateScrollHints();
-                }
-            }
-        }, { threshold: 0.3 });
-
-        observer.observe(description);
-    }
-
-    if (overviewHint) {
-        const overview = document.querySelector('.page[data-overview]');
-        const observer = new IntersectionObserver(entries => {
-            for (const entry of entries) {
-                if (entry.target === overview) {
-                    intersections.overview = entry.intersectionRatio >= 0.7;
-                    updateScrollHints();
-                }
-            }
-        }, { threshold: 0.7 });
-
-        observer.observe(overview);
-    }
-});
