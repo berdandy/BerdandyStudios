@@ -1,6 +1,15 @@
-const T = {
+const PLAYER_JS_T = {
     listen: 'Listen',
-    pause: 'Pause'
+    mute: 'Mute',
+    pause: 'Pause',
+    playbackPosition: 'Playback position',
+    playerClosed: 'Player closed',
+    playerOpenPlayingXxx: title => 'Player open, playing {title}'.replace('{title}', title),
+    unmute: 'Unmute',
+    volume: 'Volume',
+    xxxHours: hours => '{xxx} hours'.replace('{xxx}', hours),
+    xxxMinutes: minutes => '{xxx} minutes'.replace('{xxx}', minutes),
+    xxxSeconds: seconds => '{xxx} seconds'.replace('{xxx}', seconds)
 };
 const loadingIcon = document.querySelector('#loading_icon');
 const pauseIcon = document.querySelector('#pause_icon');
@@ -21,19 +30,21 @@ const dockedPlayer = {
     number: dockedPlayerContainer.querySelector('.number'),
     playbackButton: dockedPlayerContainer.querySelector('button.playback'),
     progress: dockedPlayerContainer.querySelector('.progress'),
+    status: document.querySelector('.docked_player_status'),
     time: dockedPlayerContainer.querySelector('.time'),
     timeline: dockedPlayerContainer.querySelector('.timeline'),
     timelineInput: dockedPlayerContainer.querySelector('.timeline input'),
     titleWrapper: dockedPlayerContainer.querySelector('.title_wrapper'),
     volumeButton: dockedPlayerContainer.querySelector('.volume button'),
-    volumeInput: dockedPlayerContainer.querySelector('.volume input')
+    volumeInput: dockedPlayerContainer.querySelector('.volume input'),
+    volumeSvgTitle: dockedPlayerContainer.querySelector('.volume svg title')
 };
 
 let globalUpdatePlayHeadInterval;
 
 const volume = {
     container: document.querySelector('.volume'),
-    level: 1,
+    level: 1
 };
 
 const persistedVolume = localStorage.getItem('faircampVolume');
@@ -58,10 +69,24 @@ function formatTime(seconds) {
     }
 }
 
+function formatTimeWrittenOut(seconds) {
+    if (seconds < 60) {
+        return PLAYER_JS_T.xxxSeconds(Math.floor(seconds));
+    } else {
+        const secondsWrittenOut = PLAYER_JS_T.xxxSeconds(Math.floor(Math.floor(seconds % 60)));
+        if (seconds < 3600) {
+            return `${PLAYER_JS_T.xxxMinutes(Math.floor(seconds / 60))} ${secondsWrittenOut}`;
+        } else {
+            return `${PLAYER_JS_T.xxxHours(Math.floor(seconds / 3600))} ${PLAYER_JS_T.xxxMinutes(Math.floor((seconds % 3600) / 60))} ${secondsWrittenOut}`;
+        }
+    }
+}
+
 async function mountAndPlay(track, seekTo) {
     activeTrack = track;
 
     dockedPlayer.container.classList.add('active');
+    dockedPlayer.status.setAttribute('aria-label', PLAYER_JS_T.playerOpenPlayingXxx(track.title.textContent));
     dockedPlayer.time.textContent = `0:00 / ${formatTime(activeTrack.duration)}`;
     dockedPlayer.timelineInput.max = track.container.dataset.duration;
 
@@ -88,7 +113,7 @@ async function mountAndPlay(track, seekTo) {
     track.playbackButtonIcon.replaceChildren(loadingIcon.content.cloneNode(true));
     dockedPlayer.playbackButton.replaceChildren(loadingIcon.content.cloneNode(true));
     listenButtonIcon.replaceChildren(loadingIcon.content.cloneNode(true));
-    listenButtonLabel.textContent = T.pause;
+    listenButtonLabel.textContent = PLAYER_JS_T.pause;
 
     if (track.audio.preload !== 'auto') {
         track.audio.preload = 'auto';
@@ -146,7 +171,7 @@ async function mountAndPlay(track, seekTo) {
             track.container.classList.remove('active');
             track.playbackButtonIcon.replaceChildren(playIcon.content.cloneNode(true));
             listenButtonIcon.replaceChildren(playIcon.content.cloneNode(true));
-            listenButtonLabel.textContent = T.listen;
+            listenButtonLabel.textContent = PLAYER_JS_T.listen;
         };
 
         // We expose both `abortSeeking` and `seek` on this seeking object,
@@ -225,10 +250,12 @@ function togglePlayback(track, seekTo = null) {
 // trigger screenreader announcements when it makes sense - e.g. when
 // focusing the range input, when seeking, when playback ends etc.
 function announcePlayhead(track) {
+    const valueText = `${PLAYER_JS_T.playbackPosition} ${formatTimeWrittenOut(dockedPlayer.timelineInput.value)}`;
+
+    dockedPlayer.timelineInput.setAttribute('aria-valuetext', valueText);
+
     if (track.waveform) {
-        // TODO: Announce "current: xxxx, remaining: xxxxx"?
-        dockedPlayer.timelineInput.setAttribute('aria-valuetext', formatTime(track.waveform.input.value));
-        track.waveform.input.setAttribute('aria-valuetext', formatTime(track.waveform.input.value));
+        track.waveform.input.setAttribute('aria-valuetext', valueText);
     }
 }
 
@@ -238,6 +265,7 @@ function updatePlayhead(track, reset = false) {
 
     dockedPlayer.progress.style.setProperty('width', `${factor * 100}%`);
     dockedPlayer.time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(track.duration)}`;
+    dockedPlayer.timelineInput.value = audio.currentTime;
 
     if (track.waveform) {
         track.waveform.svg.querySelector('linearGradient.playback stop:nth-child(1)').setAttribute('offset', factor);
@@ -293,12 +321,15 @@ function updateVolume(restoreLevel = null) {
     };
 
     if (volume.level === 1) {
+        dockedPlayer.volumeSvgTitle.textContent = PLAYER_JS_T.mute;
         document.querySelector('.volume_hint.dimmed').classList.remove('active');
         document.querySelector('.volume_hint.muted').classList.remove('active');
     } else if (volume.level == 0) {
+        dockedPlayer.volumeSvgTitle.textContent = PLAYER_JS_T.unmute;
         document.querySelector('.volume_hint.dimmed').classList.remove('active');
         document.querySelector('.volume_hint.muted').classList.add('active');
     } else {
+        dockedPlayer.volumeSvgTitle.textContent = PLAYER_JS_T.mute;
         document.querySelector('.volume_hint.dimmed').classList.add('active');
         document.querySelector('.volume_hint.muted').classList.remove('active');
     }
@@ -317,7 +348,7 @@ function updateVolume(restoreLevel = null) {
 
     const percent = volume.level * 100;
     const percentFormatted = percent % 1 > 0.1 ? (Math.trunc(percent * 10) / 10) : Math.trunc(percent);
-    dockedPlayer.volumeInput.setAttribute('aria-valuetext', `${percentFormatted}%`);
+    dockedPlayer.volumeInput.setAttribute('aria-valuetext', `${PLAYER_JS_T.volume} ${percentFormatted}%`);
     dockedPlayer.volumeInput.value = volume.level;
 
     if (restoreLevel === null) {
@@ -328,6 +359,8 @@ function updateVolume(restoreLevel = null) {
 }
 
 dockedPlayer.container.addEventListener('keydown', event => {
+    if (event.target === dockedPlayer.volumeInput) return;
+
     if (event.key === 'ArrowLeft') {
         event.preventDefault();
         const seekTo = Math.max(0, activeTrack.audio.currentTime - 5);
@@ -356,12 +389,16 @@ dockedPlayer.timeline.addEventListener('click', () => {
     const factor = (event.clientX - dockedPlayer.timeline.getBoundingClientRect().x) / dockedPlayer.timeline.getBoundingClientRect().width;
     const seekTo = factor * dockedPlayer.timelineInput.max;
     togglePlayback(activeTrack, seekTo);
-    dockedPlayer.timelineInput.classList.add('focus_from_click');
+    dockedPlayer.timeline.classList.add('focus_from_click');
     dockedPlayer.timelineInput.focus();
 });
 
 dockedPlayer.timelineInput.addEventListener('blur', () => {
-    dockedPlayer.timelineInput.classList.remove('focus_from_click');
+    dockedPlayer.timeline.classList.remove('focus', 'focus_from_click');
+});
+
+dockedPlayer.timelineInput.addEventListener('focus', () => {
+    dockedPlayer.timeline.classList.add('focus');
 });
 
 dockedPlayer.timelineInput.addEventListener('keydown', event => {
@@ -509,6 +546,7 @@ for (const container of document.querySelectorAll('.track')) {
         } else {
             activeTrack = null;
             dockedPlayer.container.classList.remove('active');
+            dockedPlayer.status.setAttribute('aria-label', PLAYER_JS_T.playerClosed);
         }
     });
 
@@ -518,7 +556,7 @@ for (const container of document.querySelectorAll('.track')) {
         container.classList.remove('playing');
         dockedPlayer.playbackButton.replaceChildren(playIcon.content.cloneNode(true));
         listenButtonIcon.replaceChildren(playIcon.content.cloneNode(true));
-        listenButtonLabel.textContent = T.listen;
+        listenButtonLabel.textContent = PLAYER_JS_T.listen;
         track.playbackButtonIcon.replaceChildren(playIcon.content.cloneNode(true));
 
         if (track.onPause) {
@@ -534,7 +572,7 @@ for (const container of document.querySelectorAll('.track')) {
         container.classList.add('active', 'playing');
         dockedPlayer.playbackButton.replaceChildren(pauseIcon.content.cloneNode(true));
         listenButtonIcon.replaceChildren(pauseIcon.content.cloneNode(true));
-        listenButtonLabel.textContent = T.pause;
+        listenButtonLabel.textContent = PLAYER_JS_T.pause;
         track.playbackButtonIcon.replaceChildren(pauseIcon.content.cloneNode(true));
 
         globalUpdatePlayHeadInterval = setInterval(() => updatePlayhead(track), 1000 / 24);
@@ -545,7 +583,7 @@ for (const container of document.querySelectorAll('.track')) {
     audio.addEventListener('playing', event => {
         dockedPlayer.playbackButton.replaceChildren(pauseIcon.content.cloneNode(true));
         listenButtonIcon.replaceChildren(pauseIcon.content.cloneNode(true));
-        listenButtonLabel.textContent = T.pause;
+        listenButtonLabel.textContent = PLAYER_JS_T.pause;
         track.playbackButtonIcon.replaceChildren(pauseIcon.content.cloneNode(true));
     });
 
@@ -554,7 +592,7 @@ for (const container of document.querySelectorAll('.track')) {
         //       indicate the loading state too
         dockedPlayer.playbackButton.replaceChildren(loadingIcon.content.cloneNode(true));
         listenButtonIcon.replaceChildren(loadingIcon.content.cloneNode(true));
-        listenButtonLabel.textContent = T.pause;
+        listenButtonLabel.textContent = PLAYER_JS_T.pause;
         track.playbackButtonIcon.replaceChildren(loadingIcon.content.cloneNode(true));
     });
 
