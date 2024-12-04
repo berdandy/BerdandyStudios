@@ -95,6 +95,12 @@ form button:hover {
 .artists { color: var(--fg-3); }
 .artists a { color: var(--fg-3); }
 .artists a:hover { color: var(--fg-3-focus); }
+audio {
+    border: 1px solid var(--bg-3);
+    border-radius: .5rem;
+    margin-top: .5rem;
+    width: 100%;
+}
 body {
     background-color: var(--bg-1);
     color: var(--fg-2);
@@ -140,7 +146,7 @@ body {
 #browser input:focus-visible { outline: none; }
 #browser .number {
     color: var(--fg-3);
-    padding-right: .4rem;
+    padding-inline-end: .4rem;
 }
 #browser #results {
     display: flex;
@@ -244,6 +250,10 @@ button svg { display: inline-block; }
 }
 .docked_player .number { margin-inline-end: .5rem; }
 .docked_player .playback { margin-inline-start: .4rem; }
+.docked_player .time {
+    font-size: 1.1rem;
+    font-variant: tabular-nums;
+}
 .docked_player .timeline {
     cursor: pointer;
     height: .8rem;
@@ -286,15 +296,10 @@ button svg { display: inline-block; }
 .docked_player .track_info {
     align-items: center;
     display: flex;
-    margin-inline-start: .2em;
-    margin-inline-end: .6em;
-    overflow-x: hidden;
+    margin-inline: .2em .6em;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
-.docked_player .volume_hint {
-    margin-inline-start: .2em;
-    margin-inline-end: 1.2em;
 }
 .docked_player.tall .elements { height: 3.8rem; }
 .docked_player.tall .number { margin-inline-end: .8rem; }
@@ -390,38 +395,23 @@ h2 {
     margin: 0;
 }
 .hcenter_unconstrained { margin: 0 auto; }
-.hcenter_wide {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 33rem;
-}
 header {
-    align-items: center;
-    box-sizing: border-box;
+    align-items: flex-start;
     display: flex;
-    height: 2.5rem;
     justify-content: space-between;
-    padding-inline-start: .3rem;
-    padding-inline-end: .8rem;
-    position: absolute;
-    width: 100%;
-    z-index: 1;
+    padding-block: .4em;
+    padding-inline: .3em .8em;
 }
-header > div {
-    align-items: center;
-    display: flex;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-header > button,
-header > div a {
-    align-items: center;
-    column-gap: .3rem;
-    display: flex;
+header a,
+header button {
     padding: .4rem;
 }
-#browse:focus-visible,
+header button {
+    align-items: center;
+    column-gap: .3rem;
+    display: inline-flex;
+}
+.browse:focus-visible,
 header > div a:focus-visible {
     background: var(--fg-3);
     color: var(--bg-1);
@@ -432,9 +422,16 @@ header > div a:focus-visible {
     outline: none;
 }
 header > div > span { margin-inline: .2rem; }
-header #browse { color: var(--fg-3); }
-header #browse:hover {
+header .browse { color: var(--fg-3); }
+header .browse:not(:focus-visible):hover {
     color: var(--fg-3-focus);
+}
+header #logo svg {
+    display: inline-block;
+    height: 1.4em;
+    margin-inline-end: .1rem;
+    top: .4em;
+    width: 1.4em;
 }
 header svg {
     position: relative;
@@ -463,16 +460,7 @@ img {
 }
 .image svg { height: 100%; }
 .large_type { font-size: 1.4rem; }
-#logo { flex-shrink: 0; }
-#logo svg {
-    height: 1.4em;
-    width: 1.4em;
-}
 main { box-sizing: border-box; }
-.mobile_hpadding {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
 path.loading_left {
     /* The loading icon is at first the pause icon, but after about 500ms
        (400ms delay + ~100ms until first tweening occurs) the loading
@@ -554,9 +542,8 @@ path.loading_right {
     --page-margin-h: 1rem;
     position: relative;
 }
-.page_100vh { min-height: 100vh; }
+.page_90vh { min-height: 90vh; }
 .page_50vh { min-height: 50vh; }
-.page_60vh { min-height: 60vh; }
 .page_center {
     align-items: center;
     display: flex;
@@ -580,12 +567,9 @@ path.loading_right {
     grid-template-columns: 1fr;
 }
 .page_more {
+    backdrop-filter: blur(.5rem);
     background: var(--fg-1-veil);
-    border-radius: .3rem;
-    box-sizing: border-box;
     flex-grow: 1;
-    max-width: 49rem;
-    padding: 5rem;
 }
 .page_split {
     align-items: center;
@@ -629,6 +613,22 @@ pre { margin: 0; }
 .release_compact img { border-radius: var(--cover-border-radius); }
 .release_info { font-size: 1.14rem; }
 .release_info img { border-radius: var(--cover-border-radius); }
+.skip_to_content {
+    background: var(--fg-3);
+    border-radius: .3rem;
+    color: var(--bg-1) !important;
+    left: 50%;
+    padding: .5rem 1rem;
+    position: fixed;
+    top: 4rem;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 1;
+}
+.skip_to_content:not(:focus-visible) {
+    opacity: 0;
+    pointer-events: none;
+}
 svg {
     display: block;
     fill: currentColor;
@@ -667,7 +667,7 @@ svg * { pointer-events: none; /* prevent click events on sub elements of an svg 
 .track button { padding: 0; }
 .track > :nth-child(2) {
     flex-grow: 1;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 .track .number {
     color: var(--fg-3);
@@ -675,20 +675,22 @@ svg * { pointer-events: none; /* prevent click events on sub elements of an svg 
 }
 .track .time { margin-left: .2rem; }
 .track .track_playback {
-    align-items: center;
-    background: var(--bg-1-overlay);
     border-radius: .3rem;
-    color: var(--bg-2);
     display: flex;
     flex-shrink: 0;
     font-size: 1.3rem;
     height: 3rem;
-    justify-content: center;
     position: relative;
     width: 3rem;
 }
-.track .track_playback:focus-visible,
-.track .track_playback:hover {
+.js_enabled .track_playback {
+    align-items: center;
+    background: var(--bg-1-overlay);
+    color: var(--bg-2);
+    justify-content: center;
+}
+.js_enabled .track .track_playback:focus-visible,
+.js_enabled .track .track_playback:hover {
     background: var(--bg-2-overlay);
     color: var(--fg-1);
 }
@@ -706,10 +708,12 @@ svg * { pointer-events: none; /* prevent click events on sub elements of an svg 
     border-radius: .3rem;
     bottom: 0;
     left: 0;
-    opacity: .5;
     position: absolute;
     right: 0;
     top: 0;
+}
+.js_enabled .track_playback img {
+    opacity: .5;
     z-index: -1;
 }
 .track .track_playback svg { display: block; }
@@ -733,7 +737,7 @@ svg * { pointer-events: none; /* prevent click events on sub elements of an svg 
     margin-top: .2rem;
     outline: none;
 }
-.track a.title:hover { color: var(--fg-1-focus); }
+.track a.title:not(:focus-visible):hover { color: var(--fg-1-focus); }
 .tracks { flex-grow: 1; }
 .tracks.compact .track { column-gap: .5rem; }
 .tracks.compact .track:not(:first-child) { margin-top: .5rem; }
@@ -747,6 +751,10 @@ svg * { pointer-events: none; /* prevent click events on sub elements of an svg 
     font-size: 1.5rem;
     height: 4rem;
     width: 4rem;
+}
+input::placeholder {
+    color: var(--mg);
+    opacity: 1;
 }
 input[type="number"],
 input[type="text"] {
@@ -768,7 +776,7 @@ input[type="text"].disabled,
     display: flex;
     margin-bottom: 2rem;
 }
-.unlock_code { margin-right: .3rem; }
+.unlock_code { margin-inline-end: .3rem; }
 .volume {
     align-items: center;
     display: flex;
@@ -776,7 +784,7 @@ input[type="text"].disabled,
 .volume input {
     opacity: 0;
     margin-inline-end: 0;
-    transition: opacity 200ms ease, margin-right 200ms ease, width 200ms ease;
+    transition: opacity 200ms ease, margin-inline-end 200ms ease, width 200ms ease;
     width: 0;
 }
 .volume button { color: var(--fg-1); }
@@ -785,11 +793,12 @@ input[type="text"].disabled,
     background: var(--fg-1);
     border-radius: .2rem;
     color: var(--bg-1);
+    display: none;
     font-size: .8rem;
     font-weight: 600;
+    margin-inline: .2em 1.2em;
     padding: .3rem .4rem;
 }
-.volume_hint:not(.active) { display: none; }
 .volume:hover input,
 .volume input:focus-visible,
 .volume button:focus-visible + .slider input {
@@ -854,11 +863,37 @@ input[type="text"].disabled,
     top: -.1em;
 }
 /* In js-enabled browsers we put .js_enabled on the body on each page load */
-.js_enabled audio { display: none; }
-.js_enabled .payment,
-.js_enabled .unlock_manual { display: none; }
-.js_enabled .unlock_scripted { display: unset; }
-.js_enabled .payment.active { display: unset; }
+body:not(.js_enabled) .track_playback { cursor: default; }
+body:not(.js_enabled) .waveform { display: none; }
+body.js_enabled audio { display: none; }
+body.js_enabled .payment,
+body.js_enabled .unlock_manual { display: none; }
+body.js_enabled .unlock_scripted { display: unset; }
+body.js_enabled .payment.active { display: unset; }
+body:not(.js_enabled) #confirm_price .interactive { display: none; }
+body.js_enabled #confirm_price .non_interactive { display: none; }
+.js_notice {
+    align-items: center;
+    -webkit-backdrop-filter: blur(3px) brightness(60%);
+    backdrop-filter: blur(3px) brightness(60%);
+    background: var(--bg-acc-overlay);
+    bottom: 0;
+    color: var(--fg-acc);
+    display: flex;
+    font-size: 1.1rem;
+    justify-content: center;
+    left: 0;
+    min-height: 2rem;
+    padding: 1rem;
+    position: fixed;
+    right: 0;
+}
+body.js_enabled .js_notice { display: none; }
+body:not(.js_enabled) button.browse,
+body:not(.js_enabled) button[data-copy],
+body:not(.js_enabled) button.listen {
+    display: none !important;
+}
 @media (max-width: 20rem) {
     .track .number { display: none; }
 }
@@ -869,27 +904,32 @@ input[type="text"].disabled,
     .actions.primary { font-size: 1.1rem; }
     h1 { font-size: 1.8rem; }
     .page { --page-margin-h: 2rem; }
+    .volume_hint.active { display: initial; }
 }
 @media (min-width: 30rem) {
     .docked_player { font-size: 1.14rem;  }
-    header {
-        font-size: 1.14rem;
-        height: 3.2rem;
-    }
+    header { font-size: 1.14rem; }
     .home_image { height: 12rem; }
-    .mobile_hpadding {
-        padding-left: 0;
-        padding-right: 0;
-    }
 }
 @media (max-width: 39.999rem) {
     .text ol { padding-left: 1rem; }
     .text ul { padding-left: .7rem; }
+    .page_more {
+        margin: 0 0 3rem 0;
+        padding: 3rem var(--page-margin-h);
+    }
 }
 @media (min-width: 40rem) {
     .actions.primary { font-size: 1.2rem; }
     h1 { font-size: 2rem; }
+    .js_notice { padding: .5rem; }
     .page_grid > div { grid-template-columns: 1fr 1fr; }
+    .page_more {
+        border-radius: var(--cover-border-radius);
+        box-sizing: border-box;
+        max-width: 49rem;
+        padding: 5rem;
+    }
 }
 @media (max-width: 49.999rem) {
     .abstract {

@@ -120,70 +120,6 @@ const RELEASES = [
 ,
 {
     
-    cover: 'cover_160.jpg?05hGnZFPdxQ',
-    title: 'The Further You Fall - Single',
-    tracks: [
-        {
-    
-    number: '',
-    title: 'The further you fall (instrumental)',
-    url: 'further-you-fall-single/1/'
-}
-
-    ],
-    url: 'further-you-fall-single/'
-}
-,
-{
-    
-    cover: 'cover_160.jpg?PHJJ55uWhrU',
-    title: 'Pickups - Single',
-    tracks: [
-        {
-    
-    number: '',
-    title: 'pickups',
-    url: 'pickups-single/1/'
-}
-
-    ],
-    url: 'pickups-single/'
-}
-,
-{
-    
-    cover: 'cover_160.jpg?Gc-HtQM_-j8',
-    title: 'Theremin Crown - Single',
-    tracks: [
-        {
-    
-    number: '',
-    title: 'theremin crown',
-    url: 'theremin-crown-single/1/'
-}
-
-    ],
-    url: 'theremin-crown-single/'
-}
-,
-{
-    
-    cover: 'cover_160.jpg?Jimizwtssn0',
-    title: 'Lesser Sound of London - Single',
-    tracks: [
-        {
-    
-    number: '',
-    title: 'lesser sound of london',
-    url: 'lessol-single/1/'
-}
-
-    ],
-    url: 'lessol-single/'
-}
-,
-{
-    
     cover: 'cover_160.jpg?JWRStINd6yY',
     title: 'Drip Drop - EP',
     tracks: [
@@ -249,54 +185,6 @@ const RELEASES = [
 ,
 {
     
-    cover: 'cover_160.jpg?t2PvmhCmUzA',
-    title: 'Do Nanobees Dream of Electric Honey? - Single',
-    tracks: [
-        {
-    
-    number: '',
-    title: 'Do Nanobees Dream of Electric Honey',
-    url: 'nanobees-single/1/'
-}
-
-    ],
-    url: 'nanobees-single/'
-}
-,
-{
-    
-    cover: 'cover_160.jpg?eSopNUKn67M',
-    title: 'Hypnotoad on a Hot Plate - Single',
-    tracks: [
-        {
-    
-    number: '',
-    title: 'Hypnotoad on a Hot Plate',
-    url: 'hypnotoad-single/1/'
-}
-
-    ],
-    url: 'hypnotoad-single/'
-}
-,
-{
-    
-    cover: 'cover_160.jpg?2QPdxZ6TrYo',
-    title: 'Retroracle - Single',
-    tracks: [
-        {
-    
-    number: '',
-    title: 'Retroracle',
-    url: 'retroracle-single/1/'
-}
-
-    ],
-    url: 'retroracle-single/'
-}
-,
-{
-    
     cover: 'cover_160.jpg?7W6L2nyWgzg',
     title: 'Souls Beat Slow - Single',
     tracks: [
@@ -313,7 +201,7 @@ const RELEASES = [
 
 ];
 const browser = document.querySelector('#browser');
-const browseButton = document.querySelector('button#browse');
+const browseButton = document.querySelector('button.browse');
 
 const browseResults = browser.querySelector('#results');
 const closeButton = browser.querySelector('button');
@@ -484,6 +372,16 @@ function showBrowser() {
     statusField.setAttribute('aria-label', BROWSER_JS_T.showingFeaturedItems);
     statusField.textContent = '';
 }
+
+// When the browse/search modal is open and focus moves outside the page
+// entirely (e.g. to the addressbar) but then re-enters the page, we need
+// to make sure that it returns back to the browse/search modal (instead of
+// to an obscured element in the main body)
+document.body.addEventListener('focusin', event => {
+    if (browser.classList.contains('active') && !browser.contains(event.target)) {
+        searchField.focus();
+    }
+});
 
 browser.addEventListener('focusout', event => {
     if (event.relatedTarget && !browser.contains(event.relatedTarget)) {
