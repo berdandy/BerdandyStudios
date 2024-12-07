@@ -26,15 +26,16 @@ let preselectedTrack = null;
 const dockedPlayerContainer = document.querySelector('.docked_player');
 const dockedPlayer = {
     container: dockedPlayerContainer,
+    currentTime: dockedPlayerContainer.querySelector('.time .current'),
     nextTrackButton: dockedPlayerContainer.querySelector('button.next_track'),
     number: dockedPlayerContainer.querySelector('.number'),
     playbackButton: dockedPlayerContainer.querySelector('button.playback'),
     progress: dockedPlayerContainer.querySelector('.progress'),
     status: document.querySelector('.docked_player_status'),
-    time: dockedPlayerContainer.querySelector('.time'),
     timeline: dockedPlayerContainer.querySelector('.timeline'),
     timelineInput: dockedPlayerContainer.querySelector('.timeline input'),
     titleWrapper: dockedPlayerContainer.querySelector('.title_wrapper'),
+    totalTime: dockedPlayerContainer.querySelector('.time .total'),
     volumeButton: dockedPlayerContainer.querySelector('.volume button'),
     volumeInput: dockedPlayerContainer.querySelector('.volume input'),
     volumeSvgTitle: dockedPlayerContainer.querySelector('.volume svg title')
@@ -87,7 +88,8 @@ async function mountAndPlay(track, seekTo) {
 
     dockedPlayer.container.classList.add('active');
     dockedPlayer.status.setAttribute('aria-label', PLAYER_JS_T.playerOpenPlayingXxx(track.title.textContent));
-    dockedPlayer.time.textContent = `0:00 / ${formatTime(activeTrack.duration)}`;
+    dockedPlayer.currentTime.textContent = '0:00';
+    dockedPlayer.totalTime.textContent = formatTime(activeTrack.duration);
     dockedPlayer.timelineInput.max = track.container.dataset.duration;
 
     if (track.artists) {
@@ -264,7 +266,7 @@ function updatePlayhead(track, reset = false) {
     const factor = reset ? 0 : audio.currentTime / track.duration;
 
     dockedPlayer.progress.style.setProperty('width', `${factor * 100}%`);
-    dockedPlayer.time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(track.duration)}`;
+    dockedPlayer.currentTime.textContent = formatTime(audio.currentTime);
     dockedPlayer.timelineInput.value = audio.currentTime;
 
     if (track.waveform) {
@@ -320,19 +322,8 @@ function updateVolume(restoreLevel = null) {
         `;
     };
 
-    if (volume.level === 1) {
-        dockedPlayer.volumeSvgTitle.textContent = PLAYER_JS_T.mute;
-        document.querySelector('.volume_hint.dimmed').classList.remove('active');
-        document.querySelector('.volume_hint.muted').classList.remove('active');
-    } else if (volume.level == 0) {
-        dockedPlayer.volumeSvgTitle.textContent = PLAYER_JS_T.unmute;
-        document.querySelector('.volume_hint.dimmed').classList.remove('active');
-        document.querySelector('.volume_hint.muted').classList.add('active');
-    } else {
-        dockedPlayer.volumeSvgTitle.textContent = PLAYER_JS_T.mute;
-        document.querySelector('.volume_hint.dimmed').classList.add('active');
-        document.querySelector('.volume_hint.muted').classList.remove('active');
-    }
+    dockedPlayer.volumeButton.classList.toggle('muted', volume.level === 0);
+    dockedPlayer.volumeSvgTitle.textContent = volume.level > 0 ? PLAYER_JS_T.mute : PLAYER_JS_T.unmute;
 
     const beginAngle = -135;
     const arcAngle = volume.level * 270;

@@ -217,6 +217,7 @@ button svg { display: inline-block; }
 }
 .docked_player {
     bottom: 0;
+    direction: ltr;
     left: 0;
     position: fixed;
     right: 0;
@@ -253,6 +254,7 @@ button svg { display: inline-block; }
 .docked_player .time {
     font-size: 1.1rem;
     font-variant: tabular-nums;
+    margin-inline-start: .2rem;
 }
 .docked_player .timeline {
     cursor: pointer;
@@ -291,7 +293,6 @@ button svg { display: inline-block; }
 .docked_player .title_wrapper {
     display: inline-flex;
     flex-direction: column;
-    margin-inline-end: .6rem;
 }
 .docked_player .track_info {
     align-items: center;
@@ -673,7 +674,7 @@ svg * { pointer-events: none; /* prevent click events on sub elements of an svg 
     color: var(--fg-3);
     margin-inline-end: .2rem;
 }
-.track .time { margin-left: .2rem; }
+.track .time { margin-inline-start: .2rem; }
 .track .track_playback {
     border-radius: .3rem;
     display: flex;
@@ -711,11 +712,9 @@ svg * { pointer-events: none; /* prevent click events on sub elements of an svg 
     position: absolute;
     right: 0;
     top: 0;
-}
-.js_enabled .track_playback img {
-    opacity: .5;
     z-index: -1;
 }
+.js_enabled .track_playback img { opacity: .5; }
 .track .track_playback svg { display: block; }
 .track_download_option { position: relative; }
 .docked_player .number,
@@ -788,17 +787,9 @@ input[type="text"].disabled,
     width: 0;
 }
 .volume button { color: var(--fg-1); }
-.volume button path.inactive_range { color: var(--bg-2); }
-.volume_hint {
-    background: var(--fg-1);
-    border-radius: .2rem;
-    color: var(--bg-1);
-    display: none;
-    font-size: .8rem;
-    font-weight: 600;
-    margin-inline: .2em 1.2em;
-    padding: .3rem .4rem;
-}
+.volume button path.inactive_range { color: var(--bg-3); }
+.volume button.muted path.knob { display: none; }
+.volume button:not(.muted) path.strike_out { display: none; }
 .volume:hover input,
 .volume input:focus-visible,
 .volume button:focus-visible + .slider input {
@@ -894,17 +885,24 @@ body:not(.js_enabled) button[data-copy],
 body:not(.js_enabled) button.listen {
     display: none !important;
 }
+html[dir="rtl"] .docked_player .track_info {
+    direction: rtl;
+    flex-grow: 1;
+    margin-inline-start: 1.2rem;
+    order: 1;
+}
 @media (max-width: 20rem) {
+    .docked_player .time { display: none; }
     .track .number { display: none; }
 }
 @media (max-width: 24.999rem) {
+    .docked_player .time > :not(.current) { display: none; }
     .track .time { display: none; }
 }
 @media (min-width: 25rem) {
     .actions.primary { font-size: 1.1rem; }
     h1 { font-size: 1.8rem; }
     .page { --page-margin-h: 2rem; }
-    .volume_hint.active { display: initial; }
 }
 @media (min-width: 30rem) {
     .docked_player { font-size: 1.14rem;  }
