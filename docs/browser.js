@@ -67,49 +67,49 @@ const RELEASES = [
     tracks: [
         {
     
-    number: '01',
+    number: '1.',
     title: 'Lesser Sound of London',
     url: 'angry-paintbrush-ep/1/'
 }
 ,
 {
     
-    number: '02',
+    number: '2.',
     title: 'Revolution',
     url: 'angry-paintbrush-ep/2/'
 }
 ,
 {
     
-    number: '03',
+    number: '3.',
     title: 'All For U',
     url: 'angry-paintbrush-ep/3/'
 }
 ,
 {
     
-    number: '04',
+    number: '4.',
     title: 'Pickups',
     url: 'angry-paintbrush-ep/4/'
 }
 ,
 {
     
-    number: '05',
+    number: '5.',
     title: 'The Further You Fall (instrumental)',
     url: 'angry-paintbrush-ep/5/'
 }
 ,
 {
     
-    number: '06',
+    number: '6.',
     title: 'Chewing Baseboards',
     url: 'angry-paintbrush-ep/6/'
 }
 ,
 {
     
-    number: '07',
+    number: '7.',
     title: 'Theremin Crown',
     url: 'angry-paintbrush-ep/7/'
 }
@@ -125,56 +125,56 @@ const RELEASES = [
     tracks: [
         {
     
-    number: '01',
+    number: '1.',
     title: 'Hypnotoad on a Hot Plate',
     url: 'drip-drop-ep/1/'
 }
 ,
 {
     
-    number: '02',
+    number: '2.',
     title: 'Crank the Glitch',
     url: 'drip-drop-ep/2/'
 }
 ,
 {
     
-    number: '03',
+    number: '3.',
     title: 'Souls Beat Slow',
     url: 'drip-drop-ep/3/'
 }
 ,
 {
     
-    number: '04',
+    number: '4.',
     title: 'No Slippers at Midnight',
     url: 'drip-drop-ep/4/'
 }
 ,
 {
     
-    number: '05',
+    number: '5.',
     title: 'Retroracle',
     url: 'drip-drop-ep/5/'
 }
 ,
 {
     
-    number: '06',
+    number: '6.',
     title: 'Do Nanobees Dream of Electric Honey',
     url: 'drip-drop-ep/6/'
 }
 ,
 {
     
-    number: '07',
+    number: '7.',
     title: 'Under a Delusion of Sleep',
     url: 'drip-drop-ep/7/'
 }
 ,
 {
     
-    number: '08',
+    number: '8.',
     title: 'Crashing a Car Through a Gameshow Studio',
     url: 'drip-drop-ep/8/'
 }
@@ -201,7 +201,8 @@ const RELEASES = [
 
 ];
 const browser = document.querySelector('#browser');
-const browseButton = document.querySelector('button.browse');
+const browseButtonFooter = document.querySelector('footer button.browse');
+const browseButtonHeader = document.querySelector('header button.browse');
 
 const browseResults = browser.querySelector('#results');
 const closeButton = browser.querySelector('button');
@@ -353,6 +354,10 @@ for (const artist of ARTISTS) {
 }
 
 function hideBrowser() {
+    const browseButton = browseButtonFooter.ariaExpanded === 'true'
+        ? browseButtonFooter
+        : browseButtonHeader;
+
     browser.classList.remove('active');
     browseButton.setAttribute('aria-expanded', 'false');
     searchField.value = '';
@@ -365,7 +370,7 @@ function hideBrowser() {
     browseButton.focus();
 }
 
-function showBrowser() {
+function showBrowser(browseButton) {
     browser.classList.add('active');
     browseButton.setAttribute('aria-expanded', 'true');
     searchField.focus();
@@ -384,7 +389,7 @@ document.body.addEventListener('focusin', event => {
 });
 
 browser.addEventListener('focusout', event => {
-    if (event.relatedTarget && !browser.contains(event.relatedTarget)) {
+    if (browser.classList.contains('active') && event.relatedTarget && !browser.contains(event.relatedTarget)) {
         hideBrowser();
     }
 });
@@ -396,13 +401,8 @@ browser.addEventListener('keydown', event => {
     }
 });
 
-browseButton.addEventListener('click', () => {
-    if (browser.classList.contains('active')) {
-        hideBrowser();
-    } else {
-        showBrowser();
-    }
-});
+browseButtonFooter.addEventListener('click', () => showBrowser(browseButtonFooter));
+browseButtonHeader.addEventListener('click', () => showBrowser(browseButtonHeader));
 
 closeButton.addEventListener('click', hideBrowser);
 
