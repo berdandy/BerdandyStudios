@@ -2,56 +2,49 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <atom:link href="https://berdandy.com/feed.rss" rel="self" type="application/rss+xml"/>
-        <description>Weaving realms of rhythm and coding dreams by day.
-
-"This slaps harder than a gamer rage quitting on a controller" -- Max Chuckles</description>
+        <description><description>A game developer by day, a miscreant by night, and a music producer when hooked up to an IV</description></description>
         <image>
     <link>https://berdandy.com/</link>
     <title>Berdandy's Catalog</title>
     <url>https://berdandy.com/feed.jpg?HFFcfzlvzkc</url>
 </image>
         <language>en</language>
-        <lastBuildDate>Sat, 21 Dec 2024 02:47:22 +0000</lastBuildDate>
+        <lastBuildDate>Fri, 10 Jan 2025 23:37:48 +0000</lastBuildDate>
         <link>https://berdandy.com/</link>
         <title>Berdandy's Catalog</title>
         
         <item>
-    <description>Making Angry Paintbrush felt like making my first "real" album, rather than just some random things I
-made that I mushed together in an arbitrary order.
-
-There's a LITTLE more thought behind Angry. Just a little.
-
-Enjoy!</description>
+    <description>The paintbrush was angry at the color the artist chose to use.</description>
     <guid>https://berdandy.com/angry-paintbrush-ep/</guid>
     <link>https://berdandy.com/angry-paintbrush-ep/</link>
     <title>Berdandy – Angry Paintbrush - EP</title>
 </item>
 <item>
-    <description>Drip Drop is my debut album, aptly named after the IV drip I was hooked up to for most of its production. It's a bit of a wild journey, drawing inspiration from funk, house, d'n'b, dubstep, and dropping an arcade machine down the stairs.</description>
+    <description>Berdandy's debut album</description>
     <guid>https://berdandy.com/drip-drop-ep/</guid>
     <link>https://berdandy.com/drip-drop-ep/</link>
     <title>Berdandy – Drip Drop - EP</title>
 </item>
 <item>
-    <description>To top the trip off, the skies opened up and rained on us as we cycled up the desert mountain trail. Apparently it only rains a couple of times a year there.</description>
+    <description>The best Las Vegas vacation I've had was the one where we left the city, and climbed Red Rock Canyon.</description>
     <guid>https://berdandy.com/glitching-past-red-rock-single/</guid>
     <link>https://berdandy.com/glitching-past-red-rock-single/</link>
     <title>Berdandy – Glitching Past Red Rock - Single</title>
 </item>
 <item>
-    
+    <description>String theory is a theoretical physics framework where 0-dimensional particles are replaced by 1-dimensional strings. This is not that. But it does have string instruments.</description>
     <guid>https://berdandy.com/string-theory-single/</guid>
     <link>https://berdandy.com/string-theory-single/</link>
     <title>Berdandy – String Theory - Single</title>
 </item>
 <item>
-    <description>Don't let go.</description>
+    <description>When you find your person, the world just melts away, and you move as one.</description>
     <guid>https://berdandy.com/souls-beat-slow-single/</guid>
     <link>https://berdandy.com/souls-beat-slow-single/</link>
     <title>Berdandy – Souls Beat Slow - Single</title>
 </item>
 <item>
-    
+    <description>Melancholy and chill, something for a rainy day in the woods</description>
     <guid>https://berdandy.com/regrets-single/</guid>
     <link>https://berdandy.com/regrets-single/</link>
     <title>Berdandy – Regrets - Single</title>
