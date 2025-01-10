@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <atom:link href="https://berdandy.com/feed.rss" rel="self" type="application/rss+xml"/>
+        <atom:link href="https://music.berdandy.com/feed.rss" rel="self" type="application/rss+xml"/>
         <description><description>A game developer by day, a miscreant by night, and a music producer when hooked up to an IV</description></description>
         <image>
-    <link>https://berdandy.com/</link>
+    <link>https://music.berdandy.com/</link>
     <title>Berdandy's Catalog</title>
-    <url>https://berdandy.com/feed.jpg?HFFcfzlvzkc</url>
+    <url>https://music.berdandy.com/feed.jpg?HFFcfzlvzkc</url>
 </image>
         <language>en</language>
-        <lastBuildDate>Fri, 10 Jan 2025 23:37:48 +0000</lastBuildDate>
-        <link>https://berdandy.com/</link>
+        <lastBuildDate>Fri, 10 Jan 2025 23:45:37 +0000</lastBuildDate>
+        <link>https://music.berdandy.com/</link>
         <title>Berdandy's Catalog</title>
         
         <item>
     <description>The paintbrush was angry at the color the artist chose to use.</description>
-    <guid>https://berdandy.com/angry-paintbrush-ep/</guid>
-    <link>https://berdandy.com/angry-paintbrush-ep/</link>
+    <guid>https://music.berdandy.com/angry-paintbrush-ep/</guid>
+    <link>https://music.berdandy.com/angry-paintbrush-ep/</link>
     <title>Berdandy – Angry Paintbrush - EP</title>
 </item>
 <item>
     <description>Berdandy's debut album</description>
-    <guid>https://berdandy.com/drip-drop-ep/</guid>
-    <link>https://berdandy.com/drip-drop-ep/</link>
+    <guid>https://music.berdandy.com/drip-drop-ep/</guid>
+    <link>https://music.berdandy.com/drip-drop-ep/</link>
     <title>Berdandy – Drip Drop - EP</title>
 </item>
 <item>
     <description>The best Las Vegas vacation I've had was the one where we left the city, and climbed Red Rock Canyon.</description>
-    <guid>https://berdandy.com/glitching-past-red-rock-single/</guid>
-    <link>https://berdandy.com/glitching-past-red-rock-single/</link>
+    <guid>https://music.berdandy.com/glitching-past-red-rock-single/</guid>
+    <link>https://music.berdandy.com/glitching-past-red-rock-single/</link>
     <title>Berdandy – Glitching Past Red Rock - Single</title>
 </item>
 <item>
     <description>String theory is a theoretical physics framework where 0-dimensional particles are replaced by 1-dimensional strings. This is not that. But it does have string instruments.</description>
-    <guid>https://berdandy.com/string-theory-single/</guid>
-    <link>https://berdandy.com/string-theory-single/</link>
+    <guid>https://music.berdandy.com/string-theory-single/</guid>
+    <link>https://music.berdandy.com/string-theory-single/</link>
     <title>Berdandy – String Theory - Single</title>
 </item>
 <item>
     <description>When you find your person, the world just melts away, and you move as one.</description>
-    <guid>https://berdandy.com/souls-beat-slow-single/</guid>
-    <link>https://berdandy.com/souls-beat-slow-single/</link>
+    <guid>https://music.berdandy.com/souls-beat-slow-single/</guid>
+    <link>https://music.berdandy.com/souls-beat-slow-single/</link>
     <title>Berdandy – Souls Beat Slow - Single</title>
 </item>
 <item>
     <description>Melancholy and chill, something for a rainy day in the woods</description>
-    <guid>https://berdandy.com/regrets-single/</guid>
-    <link>https://berdandy.com/regrets-single/</link>
+    <guid>https://music.berdandy.com/regrets-single/</guid>
+    <link>https://music.berdandy.com/regrets-single/</link>
     <title>Berdandy – Regrets - Single</title>
 </item>
     </channel>
