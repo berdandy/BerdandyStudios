@@ -14,6 +14,22 @@ const ARTISTS = [
 const RELEASES = [
     {
     
+    cover: 'cover_160.jpg?9exo7NNKS2g',
+    title: 'Jet - Single',
+    tracks: [
+        {
+    
+    number: '',
+    title: 'Jet',
+    url: 'jet-single/1/'
+}
+
+    ],
+    url: 'jet-single/'
+}
+,
+{
+    
     cover: 'cover_160.jpg?S7EHIPbWNpU',
     title: 'String Theory - Single',
     tracks: [

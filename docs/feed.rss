@@ -2,14 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <atom:link href="https://music.berdandy.com/feed.rss" rel="self" type="application/rss+xml"/>
-        <description><description>A game developer by day, a miscreant by night, and a music producer when hooked up to an IV</description></description>
+        <description><description>A game developer by day, a miscreant by night, and a music producer hooked up to an IV.
+
+Funky, junky, gunky, maybe a bit cyberpunky.</description></description>
         <image>
     <link>https://music.berdandy.com/</link>
     <title>Berdandy's Catalog</title>
     <url>https://music.berdandy.com/feed.jpg?HFFcfzlvzkc</url>
 </image>
         <language>en</language>
-        <lastBuildDate>Fri, 10 Jan 2025 23:45:37 +0000</lastBuildDate>
+        <lastBuildDate>Mon, 17 Feb 2025 15:26:57 +0000</lastBuildDate>
         <link>https://music.berdandy.com/</link>
         <title>Berdandy's Catalog</title>
         
@@ -30,6 +32,12 @@
     <guid>https://music.berdandy.com/glitching-past-red-rock-single/</guid>
     <link>https://music.berdandy.com/glitching-past-red-rock-single/</link>
     <title>Berdandy – Glitching Past Red Rock - Single</title>
+</item>
+<item>
+    <description>I've been rewatching a lot of Cowboy Bebop lately. I think that may have filtered through from my subconscious.</description>
+    <guid>https://music.berdandy.com/jet-single/</guid>
+    <link>https://music.berdandy.com/jet-single/</link>
+    <title>Berdandy – Jet - Single</title>
 </item>
 <item>
     <description>String theory is a theoretical physics framework where 0-dimensional particles are replaced by 1-dimensional strings. This is not that. But it does have string instruments.</description>
