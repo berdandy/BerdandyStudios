@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <author>
+    <name>Berdandy</name>
+</author>
+
+    <generator uri="https://simonrepp.com/faircamp" version="1.4.0">
+        Faircamp 1.4.0 (ecde3c1)
+    </generator>
+    <id>https://music.berdandy.com/</id>
+    <link href="https://music.berdandy.com/feed.atom" rel="self"/>
+    <logo>https://music.berdandy.com/feed.jpg?HFFcfzlvzkc</logo>
+    <subtitle>A game developer by day, a miscreant by night, and a music producer hooked up to an IV.
+
+Funky, junky, gunky, maybe a bit cyberpunky.</subtitle>
+    <title>Berdandy's Catalog</title>
+    <updated>2025-06-12T22:03:49.543161349+00:00</updated>
+    <entry>
+    <author>
+    <name>Berdandy</name>
+    
+</author>
+
+    <id>https://music.berdandy.com/glitching-past-red-rock-single/</id>
+    <link href="https://music.berdandy.com/glitching-past-red-rock-single/" rel="alternate"/>
+    <title>Berdandy – Glitching Past Red Rock - Single</title>
+    <summary>The best Las Vegas vacation I've had was the one where we left the city, and climbed Red Rock Canyon.</summary>
+    <updated>2025-06-12T22:03:49.543161349+00:00</updated>
+</entry>
+
+<entry>
+    <author>
+    <name>Berdandy</name>
+    
+</author>
+
+    <id>https://music.berdandy.com/string-theory-single/</id>
+    <link href="https://music.berdandy.com/string-theory-single/" rel="alternate"/>
+    <title>Berdandy – String Theory - Single</title>
+    <summary>String theory is a theoretical physics framework where 0-dimensional particles are replaced by 1-dimensional strings. This is not that. But it does have string instruments.</summary>
+    <updated>2025-06-12T22:03:49.543161349+00:00</updated>
+</entry>
+
+<entry>
+    <author>
+    <name>Berdandy</name>
+    
+</author>
+
+    <id>https://music.berdandy.com/regrets-single/</id>
+    <link href="https://music.berdandy.com/regrets-single/" rel="alternate"/>
+    <title>Berdandy – Regrets - Single</title>
+    <summary>Melancholy and chill, something for a rainy day in the woods</summary>
+    <updated>2025-06-12T22:03:49.543161349+00:00</updated>
+</entry>
+
+<entry>
+    <author>
+    <name>Berdandy</name>
+    
+</author>
+
+    <id>https://music.berdandy.com/jet-single/</id>
+    <link href="https://music.berdandy.com/jet-single/" rel="alternate"/>
+    <title>Berdandy – Jet - Single</title>
+    <summary>I've been rewatching a lot of Cowboy Bebop lately. I think that may have filtered through from my subconscious.</summary>
+    <updated>2025-06-12T22:03:49.543161349+00:00</updated>
+</entry>
+
+<entry>
+    <author>
+    <name>Berdandy</name>
+    
+</author>
+
+    <id>https://music.berdandy.com/souls-beat-slow-single/</id>
+    <link href="https://music.berdandy.com/souls-beat-slow-single/" rel="alternate"/>
+    <title>Berdandy – Souls Beat Slow - Single</title>
+    <summary>When you find your person, the world just melts away, and you move as one.</summary>
+    <updated>2025-06-12T22:03:49.543161349+00:00</updated>
+</entry>
+
+<entry>
+    <author>
+    <name>Berdandy</name>
+    
+</author>
+
+    <id>https://music.berdandy.com/angry-paintbrush-ep/</id>
+    <link href="https://music.berdandy.com/angry-paintbrush-ep/" rel="alternate"/>
+    <title>Berdandy – Angry Paintbrush - EP</title>
+    <summary>The paintbrush was angry at the color the artist chose to use.</summary>
+    <updated>2025-06-12T22:03:49.543161349+00:00</updated>
+</entry>
+
+<entry>
+    <author>
+    <name>Berdandy</name>
+    
+</author>
+
+    <id>https://music.berdandy.com/drip-drop-ep/</id>
+    <link href="https://music.berdandy.com/drip-drop-ep/" rel="alternate"/>
+    <title>Berdandy – Drip Drop - EP</title>
+    <summary>Berdandy's debut album</summary>
+    <updated>2025-06-12T22:03:49.543161349+00:00</updated>
+</entry>
+
+</feed>

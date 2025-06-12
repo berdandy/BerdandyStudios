@@ -19,6 +19,7 @@ const RELEASES = [
     tracks: [
         {
     
+    
     number: '',
     title: 'Jet',
     url: 'jet-single/1/'
@@ -34,6 +35,7 @@ const RELEASES = [
     title: 'String Theory - Single',
     tracks: [
         {
+    
     
     number: '',
     title: 'String Theory',
@@ -51,6 +53,7 @@ const RELEASES = [
     tracks: [
         {
     
+    
     number: '',
     title: 'regrets',
     url: 'regrets-single/1/'
@@ -66,6 +69,7 @@ const RELEASES = [
     title: 'Glitching Past Red Rock - Single',
     tracks: [
         {
+    
     
     number: '',
     title: 'Glitching past Red Rock',
@@ -83,12 +87,14 @@ const RELEASES = [
     tracks: [
         {
     
+    
     number: '1.',
     title: 'Lesser Sound of London',
     url: 'angry-paintbrush-ep/1/'
 }
 ,
 {
+    
     
     number: '2.',
     title: 'Revolution',
@@ -97,12 +103,14 @@ const RELEASES = [
 ,
 {
     
+    
     number: '3.',
     title: 'All For U',
     url: 'angry-paintbrush-ep/3/'
 }
 ,
 {
+    
     
     number: '4.',
     title: 'Pickups',
@@ -111,6 +119,7 @@ const RELEASES = [
 ,
 {
     
+    
     number: '5.',
     title: 'The Further You Fall (instrumental)',
     url: 'angry-paintbrush-ep/5/'
@@ -118,12 +127,14 @@ const RELEASES = [
 ,
 {
     
+    
     number: '6.',
     title: 'Chewing Baseboards',
     url: 'angry-paintbrush-ep/6/'
 }
 ,
 {
+    
     
     number: '7.',
     title: 'Theremin Crown',
@@ -141,12 +152,14 @@ const RELEASES = [
     tracks: [
         {
     
+    
     number: '1.',
     title: 'Hypnotoad on a Hot Plate',
     url: 'drip-drop-ep/1/'
 }
 ,
 {
+    
     
     number: '2.',
     title: 'Crank the Glitch',
@@ -155,12 +168,14 @@ const RELEASES = [
 ,
 {
     
+    
     number: '3.',
     title: 'Souls Beat Slow',
     url: 'drip-drop-ep/3/'
 }
 ,
 {
+    
     
     number: '4.',
     title: 'No Slippers at Midnight',
@@ -169,12 +184,14 @@ const RELEASES = [
 ,
 {
     
+    
     number: '5.',
     title: 'Retroracle',
     url: 'drip-drop-ep/5/'
 }
 ,
 {
+    
     
     number: '6.',
     title: 'Do Nanobees Dream of Electric Honey',
@@ -183,12 +200,14 @@ const RELEASES = [
 ,
 {
     
+    
     number: '7.',
     title: 'Under a Delusion of Sleep',
     url: 'drip-drop-ep/7/'
 }
 ,
 {
+    
     
     number: '8.',
     title: 'Crashing a Car Through a Gameshow Studio',
@@ -205,6 +224,7 @@ const RELEASES = [
     title: 'Souls Beat Slow - Single',
     tracks: [
         {
+    
     
     number: '',
     title: 'Souls Beat Slow',
@@ -225,6 +245,7 @@ const closeButton = browser.querySelector('button');
 const searchField = browser.querySelector('input');
 const statusField = browser.querySelector('[role="status"]');
 
+const indexSuffix = window.location.pathname.endsWith('index.html') ? 'index.html' : '';
 const rootPrefix = browser.dataset.rootPrefix;
 
 function truncateArtistList(artists, othersLink)  {
@@ -256,7 +277,7 @@ function truncateArtistList(artists, othersLink)  {
                     });
 
                 const rArtists = truncatedArtists
-                    .map(artist => `<a href="${rootPrefix}${artist.url}">${artist.name}</a>`)
+                    .map(artist => `<a href="${rootPrefix}${artist.url}${indexSuffix}">${artist.name}</a>`)
                     .join(", ");
 
                 return BROWSER_JS_T.xxxAndOthers(rArtists, othersLink);
@@ -265,33 +286,34 @@ function truncateArtistList(artists, othersLink)  {
             // In artist mode we show only "[catalog artist] and others".
             // Our sorting ensures the catalog artist is the first one,
             // so we can just take that.
-            const rArtists = `<a href="${rootPrefix}${artists[0].url}">${artists[0].name}</a>`;
+            const rArtists = `<a href="${rootPrefix}${artists[0].url}${indexSuffix}">${artists[0].name}</a>`;
 
             return BROWSER_JS_T.xxxAndOthers(rArtists, othersLink);
         }
     }
 
-    return rArtists = artists
-        .map(artist => `<a href="${rootPrefix}${artist.url}">${artist.name}</a>`)
+    return artists
+        .map(artist => `<a href="${rootPrefix}${artist.url}${indexSuffix}">${artist.name}</a>`)
         .join(", ");
 }
 
 for (const release of RELEASES) {
-    let img;
+    let imgRelease;
     if (release.cover) {
-        img = document.createElement('img');
-        img.src = rootPrefix + release.url + release.cover;
+        imgRelease = document.createElement('img');
+        imgRelease.src = rootPrefix + release.url + release.cover;
     } else {
-        img = document.createElement('span');
-        img.classList.add('placeholder');
+        imgRelease = document.createElement('img');
+        imgRelease.classList.add('procedural');
+        imgRelease.src = rootPrefix + release.url + release.coverProcedural;
     }
 
     const aText = document.createElement('a');
-    aText.href = rootPrefix + release.url;
+    aText.href = rootPrefix + release.url + indexSuffix;
 
     const aImage = aText.cloneNode(true);
     aImage.tabIndex = -1;
-    aImage.appendChild(img);
+    aImage.appendChild(imgRelease);
 
     aText.dataset.searchable = 'true';
     aText.textContent = release.title;
@@ -312,16 +334,24 @@ for (const release of RELEASES) {
     browseResults.appendChild(row);
 
     for (const track of release.tracks) {
+        let imgTrack;
+        if (track.cover) {
+            imgTrack = document.createElement('img');
+            imgTrack.src = rootPrefix + track.url + track.cover;
+        } else {
+            imgTrack = imgRelease.cloneNode(true);
+        }
+
         const number = document.createElement('span');
         number.classList.add('number');
         number.textContent = track.number;
 
         const aTitle = document.createElement('a');
-        aTitle.href = rootPrefix + track.url;
+        aTitle.href = rootPrefix + track.url + indexSuffix;
 
         const aImage = aTitle.cloneNode(true);
         aImage.tabIndex = -1;
-        aImage.appendChild(img.cloneNode(true));
+        aImage.appendChild(imgTrack);
 
         aTitle.dataset.searchable = 'true';
         aTitle.textContent = track.title;
@@ -348,14 +378,21 @@ for (const release of RELEASES) {
 
 for (const artist of ARTISTS) {
     const aText = document.createElement('a');
-    aText.href = rootPrefix + artist.url;
+    aText.href = rootPrefix + artist.url + indexSuffix;
 
-    const imgPlaceholder = document.createElement('span');
-    imgPlaceholder.classList.add('placeholder');
+    let imageArtist;
+    if (artist.image) {
+        imageArtist = document.createElement('img');
+        imageArtist.classList.add('crop');
+        imageArtist.src = rootPrefix + artist.url + artist.image;
+    } else {
+        imageArtist = document.createElement('span');
+        imageArtist.classList.add('placeholder');
+    }
 
     const aImage = aText.cloneNode(true);
     aImage.tabIndex = -1;
-    aImage.appendChild(imgPlaceholder);
+    aImage.appendChild(imageArtist);
 
     aText.dataset.searchable = 'true';
     aText.textContent = artist.name;

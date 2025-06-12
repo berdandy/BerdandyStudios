@@ -61,7 +61,7 @@
 }
 body, button, input { font-family: 'Barlow', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 body::before {
-    background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url(background-Snw1MrUF3tI.jpg) center / cover;
+    background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url(background-mWNCqcRHhM0.jpg) center / cover;
     content: '';
     display: block;
     height: 100vh;
